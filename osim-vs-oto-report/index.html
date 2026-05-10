@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-HK" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSIM uErgoh vs OTO 按摩椅 — 詳細比較報告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="light"] {
+  --color-bg:             #f8f6f1;
+  --color-surface:        #fdfcf9;
+  --color-surface-2:      #ffffff;
+  --color-surface-offset: #f0ede7;
+  --color-surface-offset-2: #eae8e2;
+  --color-divider:        #ddd9d2;
+  --color-border:         #ccc8c0;
+  --color-text:           #2a2620;
+  --color-text-muted:     #6b6760;
+  --color-text-faint:     #b0ada6;
+  --color-primary:        #017d72;
+  --color-primary-hover:  #016059;
+  --color-primary-highlight: #d0e8e6;
+  --color-secondary:      #b84d14;
+  --color-secondary-highlight: #fbe8dc;
+  --color-warning:        #c8900a;
+  --color-warning-highlight: #fdf2d6;
+  --color-success:        #3d7a20;
+  --color-success-highlight: #deefd4;
+  --color-neutral:        #5a7a8f;
+  --color-neutral-highlight: #dce8ef;
+  --radius-sm: 0.375rem; --radius-md: 0.5rem;
+  --radius-lg: 0.75rem; --radius-xl: 1rem; --radius-full: 9999px;
+  --shadow-sm: 0 1px 3px oklch(0.2 0.01 80 / 0.07);
+  --shadow-md: 0 4px 14px oklch(0.2 0.01 80 / 0.09);
+  --shadow-lg: 0 10px 32px oklch(0.2 0.01 80 / 0.12);
+  --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;
+  --space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;
+  --space-12:3rem;--space-16:4rem;--space-20:5rem;
+  --text-xs: clamp(0.75rem,0.7rem+0.25vw,0.875rem);
+  --text-sm: clamp(0.875rem,0.8rem+0.35vw,1rem);
+  --text-base: clamp(1rem,0.95rem+0.25vw,1.125rem);
+  --text-lg: clamp(1.125rem,1rem+0.75vw,1.5rem);
+  --text-xl: clamp(1.5rem,1.2rem+1.25vw,2.25rem);
+  --text-2xl: clamp(2rem,1.2rem+2.5vw,3.5rem);
+  --font-display: 'Noto Serif TC','Georgia',serif;
+  --font-body: 'Noto Sans TC','Helvetica Neue',sans-serif;
+  --content-narrow: 700px; --content-default: 980px;
+  --transition: 180ms cubic-bezier(0.16,1,0.3,1);
+}
+[data-theme="dark"] {
+  --color-bg:#181614;--color-surface:#1e1c19;--color-surface-2:#232120;
+  --color-surface-offset:#262420;--color-surface-offset-2:#2a2826;
+  --color-divider:#2e2c28;--color-border:#3a3834;
+  --color-text:#d0cec9;--color-text-muted:#807e79;--color-text-faint:#5a5955;
+  --color-primary:#3fa89f;--color-primary-hover:#278880;--color-primary-highlight:#2a3e3c;
+  --color-secondary:#d4703a;--color-secondary-highlight:#4a2e20;
+  --color-warning:#e5a823;--color-warning-highlight:#3e3010;
+  --color-success:#60a83a;--color-success-highlight:#2a3d1f;
+  --color-neutral:#5a8fa8;--color-neutral-highlight:#1e2e38;
+  --shadow-sm:0 1px 3px oklch(0 0 0/0.3);--shadow-md:0 4px 14px oklch(0 0 0/0.4);--shadow-lg:0 10px 32px oklch(0 0 0/0.5);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme]){--color-bg:#181614;--color-surface:#1e1c19;--color-surface-2:#232120;--color-surface-offset:#262420;--color-divider:#2e2c28;--color-border:#3a3834;--color-text:#d0cec9;--color-text-muted:#807e79;--color-text-faint:#5a5955;--color-primary:#3fa89f;--color-primary-hover:#278880;--color-primary-highlight:#2a3e3c;--color-secondary:#d4703a;--color-secondary-highlight:#4a2e20;--color-warning:#e5a823;--color-warning-highlight:#3e3010;--color-success:#60a83a;--color-success-highlight:#2a3d1f;--color-neutral:#5a8fa8;--color-neutral-highlight:#1e2e38;}}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;scroll-behavior:smooth;scroll-padding-top:4rem;}
+body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);line-height:1.75;color:var(--color-text);background:var(--color-bg);transition:background var(--transition),color var(--transition);}
+img,svg{display:block;max-width:100%;height:auto;}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.2;font-family:var(--font-display);}
+p,li{text-wrap:pretty;max-width:66ch;}
+button{cursor:pointer;background:none;border:none;font:inherit;color:inherit;}
+::selection{background:oklch(from var(--color-primary) l c h/0.2);}
+:focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm);}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+
+.container{max-width:var(--content-default);margin-inline:auto;padding-inline:clamp(var(--space-4),4vw,var(--space-8));}
+.container-narrow{max-width:var(--content-narrow);margin-inline:auto;padding-inline:clamp(var(--space-4),4vw,var(--space-8));}
+
+/* HEADER */
+.site-header{position:sticky;top:0;z-index:100;background:var(--color-surface);border-bottom:1px solid var(--color-divider);box-shadow:var(--shadow-sm);padding-block:var(--space-3);}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);}
+.brand{display:flex;align-items:center;gap:var(--space-2);font-family:var(--font-display);font-weight:700;font-size:var(--text-sm);color:var(--color-text);text-decoration:none;}
+.nav-links{display:flex;gap:var(--space-1);list-style:none;}
+.nav-links a{font-size:var(--text-xs);font-weight:500;color:var(--color-text-muted);text-decoration:none;padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);transition:background var(--transition),color var(--transition);}
+.nav-links a:hover{background:var(--color-surface-offset);color:var(--color-text);}
+.theme-toggle{width:36px;height:36px;border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);transition:background var(--transition);}
+.theme-toggle:hover{background:var(--color-surface-offset);}
+@media(max-width:640px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{background:var(--color-surface);padding-block:clamp(var(--space-12),8vw,var(--space-20));border-bottom:1px solid var(--color-divider);}
+.hero-badge{display:inline-flex;align-items:center;gap:var(--space-2);background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);margin-bottom:var(--space-4);}
+.hero h1{font-size:var(--text-2xl);color:var(--color-text);margin-bottom:var(--space-3);}
+.hero h1 .brand-a{color:var(--color-primary);}
+.hero h1 .brand-b{color:var(--color-secondary);}
+.hero-subtitle{font-size:var(--text-base);color:var(--color-text-muted);max-width:52ch;line-height:1.7;margin-bottom:var(--space-6);}
+.hero-chips{display:flex;flex-wrap:wrap;gap:var(--space-2);}
+.chip{display:inline-flex;align-items:center;gap:var(--space-1);font-size:var(--text-xs);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-weight:500;}
+.chip-a{background:var(--color-primary-highlight);color:var(--color-primary);}
+.chip-b{background:var(--color-secondary-highlight);color:var(--color-secondary);}
+
+/* SECTIONS */
+.report-section{padding-block:clamp(var(--space-10),6vw,var(--space-16));border-bottom:1px solid var(--color-divider);}
+.report-section:last-child{border-bottom:none;}
+.section-label{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-3);}
+.section-label .ln{background:var(--color-primary);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.section-title{font-family:var(--font-display);font-size:var(--text-xl);color:var(--color-text);margin-bottom:var(--space-6);}
+.section-intro{font-size:var(--text-base);color:var(--color-text-muted);max-width:60ch;line-height:1.75;margin-bottom:var(--space-8);}
+
+/* TOC */
+.toc{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6);margin-block:var(--space-10);}
+.toc-title{font-size:var(--text-sm);font-weight:700;color:var(--color-text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--space-4);}
+.toc-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-2);}
+.toc-list a{display:flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-3);font-size:var(--text-sm);color:var(--color-text-muted);text-decoration:none;border-radius:var(--radius-md);transition:background var(--transition),color var(--transition);}
+.toc-list a:hover{background:var(--color-surface-offset);color:var(--color-text);}
+.toc-num{font-size:var(--text-xs);font-weight:700;color:var(--color-primary);min-width:20px;}
+
+/* BRAND TAG */
+.tag-a{display:inline-block;background:var(--color-primary-highlight);color:var(--color-primary);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--radius-full);}
+.tag-b{display:inline-block;background:var(--color-secondary-highlight);color:var(--color-secondary);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--radius-full);}
+.tag-good{display:inline-block;background:var(--color-success-highlight);color:var(--color-success);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--radius-full);}
+.tag-warn{display:inline-block;background:var(--color-secondary-highlight);color:var(--color-secondary);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--radius-full);}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;margin-top:var(--space-6);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);}
+table{width:100%;border-collapse:collapse;background:var(--color-surface-2);border-radius:var(--radius-lg);overflow:hidden;}
+thead{background:var(--color-primary);}
+thead.b{background:var(--color-secondary);}
+thead th{color:#fff;font-size:var(--text-sm);font-weight:600;padding:var(--space-3) var(--space-4);text-align:left;}
+tbody tr{border-bottom:1px solid var(--color-divider);transition:background var(--transition);}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:var(--color-surface-offset);}
+tbody td{padding:var(--space-3) var(--space-4);font-size:var(--text-sm);vertical-align:middle;}
+.model-name{font-weight:700;color:var(--color-text);}
+.price-main{font-family:var(--font-display);font-weight:700;color:var(--color-primary);font-size:var(--text-base);}
+.price-main.b{color:var(--color-secondary);}
+.price-orig{font-size:var(--text-xs);color:var(--color-text-faint);text-decoration:line-through;}
+
+/* COMPARISON GRID */
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);margin-top:var(--space-6);}
+@media(max-width:600px){.cmp-grid{grid-template-columns:1fr;}}
+.cmp-card{background:var(--color-surface-2);border-radius:var(--radius-xl);padding:var(--space-5);box-shadow:var(--shadow-sm);border:1px solid oklch(from var(--color-text) l c h/0.07);}
+.cmp-card.brand-a{border-top:3px solid var(--color-primary);}
+.cmp-card.brand-b{border-top:3px solid var(--color-secondary);}
+.cmp-brand{font-size:var(--text-xs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:var(--space-3);}
+.cmp-brand.a{color:var(--color-primary);}
+.cmp-brand.b{color:var(--color-secondary);}
+.cmp-title{font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-text);margin-bottom:var(--space-4);}
+.cmp-list{list-style:none;display:flex;flex-direction:column;gap:var(--space-2);}
+.cmp-list li{display:flex;align-items:flex-start;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;}
+.cmp-list li .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:8px;}
+.dot-a{background:var(--color-primary);}
+.dot-b{background:var(--color-secondary);}
+
+/* FULL COMPARISON TABLE */
+.full-cmp-table thead{background:var(--color-surface-offset);}
+.full-cmp-table thead th{color:var(--color-text);font-size:var(--text-sm);}
+.full-cmp-table .th-a{background:var(--color-primary);color:#fff!important;}
+.full-cmp-table .th-b{background:var(--color-secondary);color:#fff!important;}
+.win-a{background:color-mix(in oklch,var(--color-primary) 8%,var(--color-surface-2));}
+.win-b{background:color-mix(in oklch,var(--color-secondary) 8%,var(--color-surface-2));}
+.icon-win{font-size:14px;}
+
+/* REVIEW CARDS */
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:var(--space-4);margin-top:var(--space-6);}
+.review-card{background:var(--color-surface-2);border-radius:var(--radius-xl);padding:var(--space-5);box-shadow:var(--shadow-sm);border:1px solid oklch(from var(--color-text) l c h/0.07);display:flex;flex-direction:column;gap:var(--space-3);}
+.review-header{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-2);}
+.review-source{font-size:var(--text-xs);font-weight:600;color:var(--color-text-faint);letter-spacing:.04em;}
+.review-stars{font-size:14px;letter-spacing:1px;}
+.review-quote{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;font-style:italic;}
+.review-footer{font-size:var(--text-xs);color:var(--color-text-faint);}
+
+/* PRO/CON */
+.pc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:var(--space-4);margin-top:var(--space-6);}
+.pc-card{background:var(--color-surface-2);border-radius:var(--radius-xl);padding:var(--space-5);box-shadow:var(--shadow-sm);border:1px solid oklch(from var(--color-text) l c h/0.07);}
+.pc-card.pro{border-top:3px solid var(--color-success);}
+.pc-card.con{border-top:3px solid var(--color-secondary);}
+.pc-icon{width:38px;height:38px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:var(--space-3);}
+.pro .pc-icon{background:var(--color-success-highlight);}
+.con .pc-icon{background:var(--color-secondary-highlight);}
+.pc-title{font-family:var(--font-display);font-size:var(--text-base);font-weight:700;color:var(--color-text);margin-bottom:var(--space-2);}
+.pc-body{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;}
+
+/* RATING */
+.rating-row{display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-3);}
+.rating-label{font-size:var(--text-sm);color:var(--color-text-muted);min-width:130px;}
+.bar-wrap{flex:1;background:var(--color-surface-offset);border-radius:var(--radius-full);height:8px;overflow:hidden;position:relative;}
+.bar{height:100%;border-radius:var(--radius-full);transition:width 0.8s cubic-bezier(0.16,1,0.3,1);}
+.bar-a{background:var(--color-primary);}
+.bar-b{background:var(--color-secondary);}
+.rating-score{font-size:var(--text-sm);font-weight:700;color:var(--color-text);min-width:28px;text-align:right;}
+
+.score-card{display:flex;align-items:center;gap:var(--space-4);background:var(--color-surface-2);border-radius:var(--radius-xl);padding:var(--space-5);box-shadow:var(--shadow-sm);border:1px solid oklch(from var(--color-text) l c h/0.07);}
+.score-big{font-family:var(--font-display);font-size:2.8rem;font-weight:700;line-height:1;}
+.score-big.a{color:var(--color-primary);}
+.score-big.b{color:var(--color-secondary);}
+.score-detail strong{display:block;font-size:var(--text-base);color:var(--color-text);margin-bottom:2px;}
+.score-detail span{font-size:var(--text-xs);color:var(--color-text-muted);}
+
+.scores-wrap{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-bottom:var(--space-8);}
+@media(max-width:560px){.scores-wrap{grid-template-columns:1fr;}}
+
+/* NOTE/WARN BOX */
+.note-box{padding:var(--space-4) var(--space-5);border-radius:var(--radius-lg);font-size:var(--text-sm);color:var(--color-text);margin-top:var(--space-4);}
+.note-box.warn{background:var(--color-secondary-highlight);border-left:3px solid var(--color-secondary);}
+.note-box.info{background:var(--color-primary-highlight);border-left:3px solid var(--color-primary);}
+.note-box.gold{background:var(--color-warning-highlight);border-left:3px solid var(--color-warning);}
+.note-box strong{color:var(--color-secondary);}
+.note-box.info strong{color:var(--color-primary);}
+.note-box.gold strong{color:var(--color-warning);}
+
+/* VERDICT */
+.verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-top:var(--space-6);}
+@media(max-width:600px){.verdict-grid{grid-template-columns:1fr;}}
+.verdict-box{background:var(--color-surface-2);border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-sm);border:1px solid oklch(from var(--color-text) l c h/0.07);}
+.verdict-box h3{font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-text);margin-bottom:var(--space-4);display:flex;align-items:center;gap:var(--space-2);}
+.verdict-list{list-style:none;display:flex;flex-direction:column;gap:var(--space-3);}
+.verdict-list li{display:flex;align-items:flex-start;gap:var(--space-3);font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;}
+.verdict-list li::before{content:'';width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:8px;}
+.for-osim li::before{background:var(--color-primary);}
+.for-oto li::before{background:var(--color-secondary);}
+
+.highlight-box{margin-top:var(--space-8);background:var(--color-primary-highlight);border-radius:var(--radius-xl);padding:var(--space-6);display:flex;gap:var(--space-4);align-items:flex-start;}
+.hl-icon{font-size:26px;flex-shrink:0;}
+.hl-text h3{font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-primary);margin-bottom:var(--space-2);}
+.hl-text p{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.7;max-width:56ch;}
+
+footer{background:var(--color-surface);border-top:1px solid var(--color-divider);padding-block:var(--space-8);text-align:center;font-size:var(--text-xs);color:var(--color-text-faint);}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0;}
+</style>
+</head>
+
+<body>
+<a href="#main" class="sr-only">跳至主要內容</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="brand">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-label="標誌">
+        <rect width="28" height="28" rx="7" fill="var(--color-primary)"/>
+        <path d="M7 9h14M7 14h10M7 19h7" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="21" cy="19" r="4" fill="white" opacity="0.9"/>
+        <path d="M19.5 19l1 1 2-1.8" stroke="var(--color-primary)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      按摩椅比較報告
+    </a>
+    <nav aria-label="頁面導覽">
+      <ul class="nav-links" role="list">
+        <li><a href="#osim">OSIM uErgoh</a></li>
+        <li><a href="#oto">OTO 系列</a></li>
+        <li><a href="#compare">深度比較</a></li>
+        <li><a href="#reviews">用家評價</a></li>
+        <li><a href="#verdict">購買建議</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" data-theme-toggle aria-label="切換深色模式">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">📊 2026年 5月 · 獨立資料整合</div>
+    <h1>
+      <span class="brand-a">OSIM uErgoh</span> 對比<br>
+      <span class="brand-b">OTO 按摩椅系列</span>
+    </h1>
+    <p class="hero-subtitle">
+      整合香港各大網購平台售價、真實用家（非贊助）評價及消委會案例，<br>
+      幫助你在兩大品牌之間作出最適合的選擇。
+    </p>
+    <div class="hero-chips">
+      <span class="chip chip-a">💺 OSIM uErgoh — 按摩電腦椅</span>
+      <span class="chip chip-b">🛋️ OTO — 傳統全身按摩椅系列</span>
+    </div>
+  </div>
+</section>
+
+<div class="container-narrow">
+  <nav class="toc" aria-label="目錄">
+    <div class="toc-title">目錄</div>
+    <ul class="toc-list" role="list">
+      <li><a href="#osim"><span class="toc-num">01</span>OSIM uErgoh 介紹與售價</a></li>
+      <li><a href="#oto"><span class="toc-num">02</span>OTO 香港按摩椅系列</a></li>
+      <li><a href="#compare"><span class="toc-num">03</span>兩大品牌深度比較</a></li>
+      <li><a href="#reviews"><span class="toc-num">04</span>真實用家及消委會評價</a></li>
+      <li><a href="#aftersales"><span class="toc-num">05</span>售後服務比較</a></li>
+      <li><a href="#verdict"><span class="toc-num">06</span>總評與購買建議</a></li>
+    </ul>
+  </nav>
+
+  <!-- ======================== SECTION 1: OSIM ======================== -->
+  <section class="report-section" id="osim">
+    <div class="section-label"><span class="ln">1</span>OSIM uErgoh</div>
+    <h2 class="section-title">按摩電腦椅（OS-8245）</h2>
+    <p class="section-intro">全球首創融合人體工學電腦椅與無線按摩的產品，2025年底在香港上市。定位是「辦公桌旁的即時舒壓方案」，並非全身按摩椅。</p>
+
+    <div class="table-wrap">
+      <table aria-label="OSIM uErgoh 香港售價">
+        <thead><tr><th>香港網購平台</th><th>售價</th><th>原價</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td><span class="model-name">🛍️ HKTVmall</span></td><td><span class="price-main">HK$4,999</span></td><td><span class="price-orig">HK$8,888</span></td><td>目前「全球斷貨，預訂中」，需留意貨期</td></tr>
+          <tr><td><span class="model-name">🏬 OSIM 官網</span></td><td><span class="price-main">HK$4,999</span></td><td><span class="price-orig">HK$8,888</span></td><td>可選免息分期付款 <span class="tag-good">分期免息</span></td></tr>
+          <tr><td><span class="model-name">📦 友和 YOHO</span></td><td><span class="price-main">HK$5,249</span></td><td><span class="price-orig">HK$8,888</span></td><td>附贈額外電池（價值HK$599）<span class="tag-good">最抵</span></td></tr>
+          <tr><td><span class="model-name">🏪 豐澤 Fortress</span></td><td><span class="price-main">HK$5,299</span></td><td><span class="price-orig">HK$8,888</span></td><td>有實體店，方便維修跟進</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box warn" style="margin-top:var(--space-4);">
+      <strong>⚠️ 注意：</strong>上門安裝費另付 HK$250，離島另加。備用電池約 HK$599，如每天按摩超過 1 小時建議購買。
+    </div>
+  </section>
+
+  <!-- ======================== SECTION 2: OTO ======================== -->
+  <section class="report-section" id="oto">
+    <div class="section-label"><span class="ln">2</span>OTO 香港按摩椅系列</div>
+    <h2 class="section-title">OTO Bodycare — 香港全系列</h2>
+    <p class="section-intro">OTO 是在香港耕耘多年的按摩椅品牌，在港設有 15 間門店，產品線從入門到旗艦均有，主力為傳統全身按摩椅。</p>
+
+    <div class="table-wrap">
+      <table aria-label="OTO香港按摩椅系列">
+        <thead class="b"><tr><th>型號</th><th>官方定價</th><th>目前優惠價</th><th>主要特點</th></tr></thead>
+        <tbody>
+          <tr><td><span class="model-name">Ethoz EZ-01 <span class="tag-b">旗艦</span></span></td><td><span class="price-orig">HK$75,800</span></td><td><span class="price-main b">HK$59,800</span></td><td>AI智能 5D雙機芯、SL導軌、18個自動程式、瑜伽拉筋</td></tr>
+          <tr><td><span class="model-name">TiTAN ELiTE TE-01</span></td><td><span class="price-orig">HK$49,800</span></td><td><span class="price-main b">HK$23,800–26,800</span></td><td>4D深度機芯、SL型130cm導軌、24個自動模式、3個零重力角度</td></tr>
+          <tr><td><span class="model-name">Solace SL-01</span></td><td><span class="price-orig">HK$49,800</span></td><td><span class="price-main b">HK$26,800</span></td><td>4D Air+3D雙機芯、泰式拉筋、腰部溫熱、足底刮痧、LED燈</td></tr>
+          <tr><td><span class="model-name">Esselence ES-07</span></td><td><span class="price-orig">HK$42,800</span></td><td><span class="price-main b">HK$12,799–19,800</span></td><td>L型長導軌、2個零重力、6個自動模式、7種按摩手法、藍牙音樂</td></tr>
+          <tr><td><span class="model-name">Quantum+ EQ-16 <span class="tag-good">慳位</span></span></td><td><span class="price-orig">HK$22,800</span></td><td><span class="price-main b">HK$7,999</span></td><td>搖搖椅功能、5個自動模式、4種按摩手法、體積較細</td></tr>
+          <tr><td><span class="model-name">Cyber-Couch CU-06</span></td><td><span class="price-orig">HK$24,800</span></td><td><span class="price-main b">HK$19,800</span></td><td>3D智能機芯、SL導軌、超強小腿揉捏、零靠牆設計、藍牙</td></tr>
+          <tr><td><span class="model-name">Rockie Premium RK-13 <span class="tag-good">入門</span></span></td><td><span class="price-orig">—</span></td><td><span class="price-main b">HK$1,998</span></td><td>入門款，基本按摩功能，適合預算有限的用家</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note-box info" style="margin-top:var(--space-4);">
+      <strong>💡 重要：</strong>OTO 在全港有 15 間實體門店，購買前可親身試坐。大型按摩椅送貨前需確認家居電梯及門口尺寸是否合適。
+    </div>
+  </section>
+
+  <!-- ======================== SECTION 3: DEEP COMPARE ======================== -->
+  <section class="report-section" id="compare">
+    <div class="section-label"><span class="ln">3</span>深度比較</div>
+    <h2 class="section-title">兩大品牌逐項對比</h2>
+    <p class="section-intro">以下比較是基於相近價格範圍（HK$5,000–27,000）的產品，讓你清楚了解兩者的本質差異。</p>
+
+    <div class="table-wrap">
+      <table class="full-cmp-table" aria-label="OSIM vs OTO詳細比較">
+        <thead>
+          <tr>
+            <th style="background:var(--color-surface-offset);color:var(--color-text-muted);">比較項目</th>
+            <th class="th-a">OSIM uErgoh<br><small style="font-weight:400;opacity:.85">HK$4,999–5,299</small></th>
+            <th class="th-b">OTO Quantum+ EQ-16<br><small style="font-weight:400;opacity:.85">HK$7,999</small></th>
+            <th class="th-b" style="background:color-mix(in oklch,var(--color-secondary) 70%,#000);">OTO Esselence ES-07<br><small style="font-weight:400;opacity:.85">HK$12,799–19,800</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>產品類型</strong></td>
+            <td class="win-a">按摩電腦椅 <span class="icon-win">💺</span></td>
+            <td>全身按摩椅（較細）</td>
+            <td>全身按摩椅（標準）</td>
+          </tr>
+          <tr>
+            <td><strong>按摩範圍</strong></td>
+            <td>肩頸至腰背<br><small style="color:var(--color-text-faint)">不含腿部</small></td>
+            <td class="win-b">頸至小腿 <span class="icon-win">✅</span></td>
+            <td class="win-b">頸、肩、背、腰、臀、小腿至腳底 <span class="icon-win">✅</span></td>
+          </tr>
+          <tr>
+            <td><strong>按摩機芯</strong></td>
+            <td>專利 V手®技術<br>踩背滾輪</td>
+            <td>基本款</td>
+            <td class="win-b">L型長導軌，7種按摩手法 <span class="icon-win">✅</span></td>
+          </tr>
+          <tr>
+            <td><strong>零重力功能</strong></td>
+            <td>❌ 無</td>
+            <td>❌ 無</td>
+            <td class="win-b">✅ 2個零重力狀態 <span class="icon-win">✅</span></td>
+          </tr>
+          <tr>
+            <td><strong>電源方式</strong></td>
+            <td class="win-a">✅ 無線電池（約60分鐘）<br><small style="color:var(--color-text-faint)">充電4小時</small></td>
+            <td>插電，不可移動</td>
+            <td>插電，不可移動</td>
+          </tr>
+          <tr>
+            <td><strong>空間佔用</strong></td>
+            <td class="win-a">✅ 與普通電腦椅相約<br>香港細單位最適合</td>
+            <td class="win-b">✅ 比標準按摩椅細</td>
+            <td>較大，需預留空間<br><small style="color:var(--color-text-faint)">需注意電梯/門口尺寸</small></td>
+          </tr>
+          <tr>
+            <td><strong>平時坐感</strong></td>
+            <td class="win-a">✅ 人體工學電腦椅設計<br>全日坐辦公適用</td>
+            <td>只適合按摩，平時坐用欠佳</td>
+            <td>只適合按摩，平時坐用欠佳</td>
+          </tr>
+          <tr>
+            <td><strong>溫熱功能</strong></td>
+            <td>❌ 無</td>
+            <td>❌ 無</td>
+            <td class="win-b">✅ 有腰部溫熱（部分型號）</td>
+          </tr>
+          <tr>
+            <td><strong>手機 App</strong></td>
+            <td class="win-a">✅ OSIM Well-Being App<br>壓力檢測+個人化程式</td>
+            <td>❌ 無</td>
+            <td>❌ 無</td>
+          </tr>
+          <tr>
+            <td><strong>藍牙音樂</strong></td>
+            <td>❌ 無</td>
+            <td>❌ 無</td>
+            <td class="win-b">✅ 有</td>
+          </tr>
+          <tr>
+            <td><strong>官方保養</strong></td>
+            <td>1年</td>
+            <td>1年</td>
+            <td>1年（可額外購買延保）</td>
+          </tr>
+          <tr>
+            <td><strong>香港實體店</strong></td>
+            <td>✅ 有</td>
+            <td class="win-b">✅ 15間門店 <span class="icon-win">✅</span></td>
+            <td class="win-b">✅ 15間門店 <span class="icon-win">✅</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:var(--space-8);">
+      <h3 style="font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-text);margin-bottom:var(--space-5);">核心差異總結</h3>
+      <div class="cmp-grid">
+        <div class="cmp-card brand-a">
+          <div class="cmp-brand a">OSIM uErgoh — 最適合</div>
+          <div class="cmp-title">長時間 WFH 打工仔</div>
+          <ul class="cmp-list" role="list">
+            <li><span class="dot dot-a"></span>整天坐著工作，想要隨時舒肩頸腰背</li>
+            <li><span class="dot dot-a"></span>香港細單位，空間有限</li>
+            <li><span class="dot dot-a"></span>想用「一張椅」解決坐椅和按摩兩個需求</li>
+            <li><span class="dot dot-a"></span>預算 HK$5,000–6,000 以內</li>
+            <li><span class="dot dot-a"></span>不追求全身按摩，只需針對上半身</li>
+          </ul>
+        </div>
+        <div class="cmp-card brand-b">
+          <div class="cmp-brand b">OTO 傳統按摩椅 — 最適合</div>
+          <div class="cmp-title">想要全身舒壓放鬆的用家</div>
+          <ul class="cmp-list" role="list">
+            <li><span class="dot dot-b"></span>想在晚上看電視時做全身按摩</li>
+            <li><span class="dot dot-b"></span>需要腿部、腳底、臀部按摩</li>
+            <li><span class="dot dot-b"></span>家居空間足夠，可放大型按摩椅</li>
+            <li><span class="dot dot-b"></span>預算 HK$8,000–27,000</li>
+            <li><span class="dot dot-b"></span>重視零重力功能幫助深層放鬆</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SECTION 4: REVIEWS ======================== -->
+  <section class="report-section" id="reviews">
+    <div class="section-label"><span class="ln">4</span>真實用家及消委會評價</div>
+    <h2 class="section-title">用家怎麼說？</h2>
+    <p class="section-intro">以下整合自非贊助的真實評價，包括自費購買的用家、香港論壇、及香港消費者委員會的投訴案例。</p>
+
+    <h3 style="font-family:var(--font-display);font-size:var(--text-lg);margin-bottom:var(--space-4);color:var(--color-primary);">OSIM uErgoh 用家評價</h3>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-source">香港 YouTube 自費測試用家</span>
+          <span class="review-stars">⭐⭐⭐⭐</span>
+        </div>
+        <p class="review-quote">「無論你的房間或整個家的空間不是特別大，它都放得下。相比傳統大型按摩椅，uErgoh 的體積與普通電腦椅差不多大小，是香港細單位的最大優勢。」</p>
+        <div class="review-footer">自費購買後拍片測試 · 2026年2月</div>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-source">香港自費用家（電池問題）</span>
+          <span class="review-stars">⭐⭐⭐</span>
+        </div>
+        <p class="review-quote">「好像上班打8個鐘頭工，然後才出1個鐘頭糧給我，那種無助感。充電4小時，只能按摩60分鐘，是最大的缺點。」</p>
+        <div class="review-footer">自費測試 · 非贊助</div>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-source">PCMarket 編輯實測（香港）</span>
+          <span class="review-stars">⭐⭐⭐⭐</span>
+        </div>
+        <p class="review-quote">「以 HK$5,000 左右買到市場唯一無線按摩電腦椅，徹底擺脫線材束縛，是區別於所有競爭對手的核心優勢。按摩力度準確，定位感強。」</p>
+        <div class="review-footer">PCMarket HK · 2025年11月</div>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-source">台灣科技媒體 T 客邦</span>
+          <span class="review-stars">⭐⭐⭐⭐</span>
+        </div>
+        <p class="review-quote">「人體工學椅只靠支撐怎麼夠？uErgoh 的按摩功能讓它真正符合現代打工仔的需要。自動肩部定位功能非常準確，踩背模式實測感覺真實。」</p>
+        <div class="review-footer">T 客邦 · 2025年7月（媒體體驗，供參考）</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--font-display);font-size:var(--text-lg);margin-top:var(--space-8);margin-bottom:var(--space-4);color:var(--color-secondary);">OTO 按摩椅用家評價</h3>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-source">Baby Kingdom 香港論壇用家</span>
+          <span class="review-stars">⭐⭐⭐</span>
+        </div>
+        <p class="review-quote">「剛試了 OTO 都幾舒服，全身都按到，特別係腳部按摩，試坐時感覺好好。但聽講有人買咗之後送貨半個鐘就壞了，一直要求退貨被拒，搞咗好耐。」</p>
+        <div class="review-footer">Baby Kingdom 香港討論區 · 真實用家</div>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-source">Lot One OTO 門店評價</span>
+          <span class="review-stars">⭐⭐⭐⭐⭐</span>
+        </div>
+        <p class="review-quote">「店員耐心解釋了三款不同價位的按摩椅，從基本型到中階型，全程沒有施壓推銷，讓我可以舒服地試坐比較。最後選了中階款，對效果很滿意。」</p>
+        <div class="review-footer">Lot One OTO 門店評價 · 2025年</div>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-source">新加坡 Reddit 用家（OTO 全系列）</span>
+          <span class="review-stars">⭐⭐⭐</span>
+        </div>
+        <p class="review-quote">「My parents bought an OTO chair. When it finally broke down, they sent a technician who said it can't really be fixed. In the end we got someone to take it away because it was so bulky and unfixable.」（父母的 OTO 壞掉後維修師傅說無法修理，最終丟棄。）</p>
+        <div class="review-footer">r/askSingapore · 2023年</div>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-source">消委會投訴案例 · OTO 相關</span>
+          <span class="review-stars">⚠️ 注意</span>
+        </div>
+        <p class="review-quote">「消費者以 HK$28,300 購買高級按摩椅，4個月後內部零件出現問題，按摩時不時發出雜聲。商戶質疑用家使用不當，拒絕換貨，只提供免費更換零件，但布料須自付費用。」</p>
+        <div class="review-footer">香港消費者委員會 · 2020年報告</div>
+      </div>
+    </div>
+
+    <div class="note-box gold" style="margin-top:var(--space-6);">
+      <strong>⚠️ 消委會提醒（適用兩大品牌）：</strong>「舊型號按摩椅零件容易被淘汰，零件供應期短，消費者需多加留意。按摩椅不屬於經常更換的產品，因它體積龐大且價格高，應嚴格考慮耐用性及維修性。」— 香港消費者委員會 2020年報告
+    </div>
+  </section>
+
+  <!-- ======================== SECTION 5: AFTER SALES ======================== -->
+  <section class="report-section" id="aftersales">
+    <div class="section-label"><span class="ln">5</span>售後服務比較</div>
+    <h2 class="section-title">保養與售後：兩大品牌的分別</h2>
+
+    <div class="cmp-grid">
+      <div class="cmp-card brand-a">
+        <div class="cmp-brand a">OSIM uErgoh 售後</div>
+        <ul class="cmp-list" role="list">
+          <li><span class="dot dot-a"></span>官方保養期：<strong>1年</strong>（偏短）</li>
+          <li><span class="dot dot-a"></span>有香港實體門店，可上門跟進</li>
+          <li><span class="dot dot-a"></span>海外評價（Trustpilot、SiteJabber）顯示售後普遍較差</li>
+          <li><span class="dot dot-a"></span>投訴集中在：零件費用昂貴、新款推出後舊款零件停供</li>
+          <li><span class="dot dot-a"></span>建議在豐澤購買，方便到實體店跟進</li>
+        </ul>
+      </div>
+      <div class="cmp-card brand-b">
+        <div class="cmp-brand b">OTO 售後</div>
+        <ul class="cmp-list" role="list">
+          <li><span class="dot dot-b"></span>官方保養期：<strong>1年</strong>（同樣偏短）</li>
+          <li><span class="dot dot-b"></span>全港 15 間門店，售後聯繫較方便</li>
+          <li><span class="dot dot-b"></span>提供額外延保計劃（需另付費）</li>
+          <li><span class="dot dot-b"></span>部分用家反映曾遇到「送貨當日即壞」的問題</li>
+          <li><span class="dot dot-b"></span>消委會有記錄相關投訴，主要集中在零件品質及換貨政策</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note-box warn" style="margin-top:var(--space-5);">
+      <strong>⚠️ 兩大品牌的共同風險：</strong>電動按摩產品（包括 OSIM 和 OTO）在香港均有一定數量的售後投訴，主要集中在「2–3年後出現故障」、「舊款零件停供」及「保養範圍有限制」這三個問題。購買前務必詢問清楚保養條款，尤其是布料、遙控器等消耗品是否包含在內。
+    </div>
+  </section>
+
+  <!-- ======================== SECTION 6: VERDICT ======================== -->
+  <section class="report-section" id="verdict">
+    <div class="section-label"><span class="ln">6</span>總評與購買建議</div>
+    <h2 class="section-title">評分及最終建議</h2>
+
+    <div class="scores-wrap">
+      <div class="score-card">
+        <div class="score-big a">7.5</div>
+        <div>
+          <div class="score-detail"><strong>OSIM uErgoh</strong><span>按摩電腦椅 · 非贊助用家綜合</span></div>
+        </div>
+      </div>
+      <div class="score-card">
+        <div class="score-big b">7.8</div>
+        <div>
+          <div class="score-detail"><strong>OTO TiTAN ELiTE / Esselence</strong><span>全身按摩椅 · 非贊助用家綜合</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div role="region" aria-label="各項評分比較" id="rating-section">
+      <div class="rating-row">
+        <span class="rating-label">按摩覆蓋範圍</span>
+        <div class="bar-wrap"><div class="bar bar-a" style="width:0" data-w="40%"></div></div>
+        <span class="rating-score" style="color:var(--color-primary)">4.0</span>
+        <span style="font-size:var(--text-xs);color:var(--color-text-faint);min-width:20px;">vs</span>
+        <div class="bar-wrap"><div class="bar bar-b" style="width:0" data-w="92%"></div></div>
+        <span class="rating-score" style="color:var(--color-secondary)">9.2</span>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">按摩效果</span>
+        <div class="bar-wrap"><div class="bar bar-a" style="width:0" data-w="80%"></div></div>
+        <span class="rating-score" style="color:var(--color-primary)">8.0</span>
+        <span style="font-size:var(--text-xs);color:var(--color-text-faint);min-width:20px;">vs</span>
+        <div class="bar-wrap"><div class="bar bar-b" style="width:0" data-w="85%"></div></div>
+        <span class="rating-score" style="color:var(--color-secondary)">8.5</span>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">空間效率</span>
+        <div class="bar-wrap"><div class="bar bar-a" style="width:0" data-w="95%"></div></div>
+        <span class="rating-score" style="color:var(--color-primary)">9.5</span>
+        <span style="font-size:var(--text-xs);color:var(--color-text-faint);min-width:20px;">vs</span>
+        <div class="bar-wrap"><div class="bar bar-b" style="width:0" data-w="35%"></div></div>
+        <span class="rating-score" style="color:var(--color-secondary)">3.5</span>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">電腦辦公適用性</span>
+        <div class="bar-wrap"><div class="bar bar-a" style="width:0" data-w="95%"></div></div>
+        <span class="rating-score" style="color:var(--color-primary)">9.5</span>
+        <span style="font-size:var(--text-xs);color:var(--color-text-faint);min-width:20px;">vs</span>
+        <div class="bar-wrap"><div class="bar bar-b" style="width:0" data-w="10%"></div></div>
+        <span class="rating-score" style="color:var(--color-secondary)">1.0</span>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">全身放鬆體驗</span>
+        <div class="bar-wrap"><div class="bar bar-a" style="width:0" data-w="35%"></div></div>
+        <span class="rating-score" style="color:var(--color-primary)">3.5</span>
+        <span style="font-size:var(--text-xs);color:var(--color-text-faint);min-width:20px;">vs</span>
+        <div class="bar-wrap"><div class="bar bar-b" style="width:0" data-w="90%"></div></div>
+        <span class="rating-score" style="color:var(--color-secondary)">9.0</span>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">性價比</span>
+        <div class="bar-wrap"><div class="bar bar-a" style="width:0" data-w="75%"></div></div>
+        <span class="rating-score" style="color:var(--color-primary)">7.5</span>
+        <span style="font-size:var(--text-xs);color:var(--color-text-faint);min-width:20px;">vs</span>
+        <div class="bar-wrap"><div class="bar bar-b" style="width:0" data-w="70%"></div></div>
+        <span class="rating-score" style="color:var(--color-secondary)">7.0</span>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">售後服務</span>
+        <div class="bar-wrap"><div class="bar bar-a" style="width:0" data-w="52%"></div></div>
+        <span class="rating-score" style="color:var(--color-primary)">5.2</span>
+        <span style="font-size:var(--text-xs);color:var(--color-text-faint);min-width:20px;">vs</span>
+        <div class="bar-wrap"><div class="bar bar-b" style="width:0" data-w="58%"></div></div>
+        <span class="rating-score" style="color:var(--color-secondary)">5.8</span>
+      </div>
+    </div>
+    <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-3);">🟢 綠色 = OSIM uErgoh &nbsp;|&nbsp; 🔴 橙色 = OTO 傳統按摩椅（Esselence/TiTAN 級別）</p>
+
+    <div class="verdict-grid" style="margin-top:var(--space-8);">
+      <div class="verdict-box">
+        <h3>💺 選 OSIM uErgoh，如果⋯⋯</h3>
+        <ul class="verdict-list for-osim" role="list">
+          <li>你已經有這張椅，每天在家工作，有肩頸腰背痛</li>
+          <li>家居細，無空間放傳統大型按摩椅</li>
+          <li>主要需求是工作時隨時舒緩，而非晚上做全身按摩</li>
+          <li>預算在 HK$5,000–6,000 以內（含電池）</li>
+          <li>不介意只按背部，不需要腿部和腳底按摩</li>
+        </ul>
+      </div>
+      <div class="verdict-box">
+        <h3>🛋️ 選 OTO 按摩椅，如果⋯⋯</h3>
+        <ul class="verdict-list for-oto" role="list">
+          <li>想要全身（包括腿部、腳底）的完整按摩體驗</li>
+          <li>晚上放鬆、看電視時做全身按摩是主要用途</li>
+          <li>家居空間足夠，可以放一張傳統按摩椅</li>
+          <li>預算 HK$8,000–27,000，願意投資更完整的設備</li>
+          <li>重視零重力功能，想要更深層的脊椎放鬆</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="hl-icon">💡</div>
+      <div class="hl-text">
+        <h3>媽媽已買了 OSIM uErgoh？</h3>
+        <p>
+          你媽媽的選擇對於 WFH 環境是非常合適的！uErgoh 在「細單位 + 打工族」這個定位上確實是獨一無二的。
+          <br><br>
+          <strong>使用小貼士：</strong>建議額外購買一顆備用電池（約 HK$599，友和 YOHO 有售），充電時換上備用電池，就可以延長連續按摩時間，解決電池不夠用的問題。
+          如有任何維修問題，建議直接聯絡豐澤實體店或 OSIM 香港客服（有香港本地售後支援）。
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <p>此報告整合自 OTO 官網、HKTVmall、友和 YOHO、豐澤、PCMarket HK、T客邦、Baby Kingdom、Reddit 及香港消費者委員會 · 僅供參考</p>
+  <p style="margin-top:var(--space-2);">資料更新日期：2026 年 5 月</p>
+</footer>
+
+<script>
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
+  let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  function ui(){
+    if(!t)return;
+    t.setAttribute('aria-label','切換'+(d==='dark'?'淺色':'深色')+'模式');
+    t.innerHTML=d==='dark'
+      ?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      :'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  }
+  ui();
+  t&&t.addEventListener('click',function(){d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);ui();});
+
+  // Animate bars on scroll
+  const bars=document.querySelectorAll('.bar[data-w]');
+  const obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        bars.forEach(function(b,i){
+          setTimeout(function(){b.style.width=b.getAttribute('data-w');},i*80);
+        });
+        obs.disconnect();
+      }
+    });
+  },{threshold:0.3});
+  const rs=document.getElementById('rating-section');
+  if(rs)obs.observe(rs);
+})();
+</script>
+</body>
+</html>
