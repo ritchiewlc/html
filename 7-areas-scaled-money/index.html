@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7-Area Intelligence Layer: Scaled + Money</title>
+<style>
+:root {
+  --bg:        #08090a;
+  --surface-1: #0f1011;
+  --surface-2: #161718;
+  --surface-3: #23252a;
+  --border:    #23252a;
+  --border-2:  #34343a;
+  --text:      #f7f8f8;
+  --text-2:    #d0d6e0;
+  --text-3:    #8a8f98;
+  --text-4:    #62666d;
+  --lime:      #e4f222;
+  --sans: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --r-card: 6px;
+  --r-pill: 9999px;
+  --r-badge: 4px;
+  --shadow-card: rgba(0,0,0,0.4) 0px 2px 4px 0px;
+  --shadow-inset: rgb(35,37,42) 0px 0px 0px 1px inset;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.13px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 32px;
+  min-height: 100vh;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 40px 16px 40px 0;
+  border-right: 1px solid var(--border);
+}
+
+nav .logo {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-4);
+  display: block;
+  margin-bottom: 28px;
+}
+
+nav ul { list-style: none; }
+
+nav ul li { margin-bottom: 2px; }
+
+nav ul li a {
+  display: block;
+  font-size: 13px;
+  color: var(--text-3);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border-left: 2px solid transparent;
+  transition: color 0.12s, background 0.12s;
+  line-height: 1.35;
+}
+
+nav ul li a:hover {
+  background: var(--surface-2);
+  color: var(--text-2);
+}
+
+nav ul li a.active {
+  color: var(--text);
+  border-left-color: var(--lime);
+  background: var(--surface-1);
+}
+
+.nav-section {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-4);
+  padding: 14px 10px 5px;
+  display: block;
+}
+
+/* MAIN */
+main {
+  padding: 40px 0 96px 40px;
+}
+
+/* HERO */
+.hero {
+  margin-bottom: 56px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--border-2);
+  flex-shrink: 0;
+}
+
+h1 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 590;
+  line-height: 1.1;
+  letter-spacing: -0.38px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--text-3);
+  max-width: 560px;
+  line-height: 1.6;
+}
+
+.hero-desc strong { color: var(--text-2); }
+
+/* SECTIONS */
+section {
+  margin-bottom: 64px;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 510;
+  letter-spacing: -0.22px;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+h3 {
+  font-size: 13px;
+  font-weight: 590;
+  color: var(--text-2);
+  margin-bottom: 10px;
+  letter-spacing: -0.1px;
+}
+
+p {
+  color: var(--text-3);
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+/* TABLE */
+.tbl-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-card);
+  margin: 16px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead tr {
+  background: var(--surface-2);
+}
+
+th {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 400;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-2);
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text-3);
+  line-height: 1.5;
+}
+
+tr:last-child td { border-bottom: none; }
+
+td:first-child {
+  color: var(--text-2);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+td.num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+td.highlight {
+  color: var(--lime);
+  font-weight: 590;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+tbody tr:hover td { background: var(--surface-1); }
+
+/* LEVEL CARDS */
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.level-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-card);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.level-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-4);
+  margin-bottom: 6px;
+}
+
+.level-title {
+  font-size: 15px;
+  font-weight: 510;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.level-meta {
+  font-size: 11px;
+  color: var(--text-4);
+  margin-bottom: 14px;
+}
+
+.level-card ul {
+  list-style: none;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.level-card ul li {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.4;
+}
+
+.level-card ul li:last-child { border-bottom: none; }
+
+.level-card ul li::before {
+  content: '› ';
+  color: var(--text-4);
+}
+
+/* FLOW SVG diagram */
+.diagram-wrap {
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+/* COMPARE */
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.compare-card {
+  padding: 16px;
+  border-radius: var(--r-card);
+  border: 1px solid var(--border-2);
+  background: var(--surface-1);
+}
+
+.compare-card.new {
+  border-color: var(--border-2);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-inset);
+}
+
+.compare-card .c-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-4);
+  margin-bottom: 8px;
+}
+
+.compare-card.new .c-tag { color: var(--text-3); }
+
+.compare-card .c-title {
+  font-size: 14px;
+  font-weight: 510;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.compare-card p {
+  font-size: 13px;
+  color: var(--text-3);
+  margin: 0;
+}
+
+/* MATH BOX */
+.math-box {
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  box-shadow: var(--shadow-inset);
+  border-radius: var(--r-card);
+  padding: 24px;
+  margin: 16px 0;
+}
+
+.math-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-4);
+  margin-bottom: 16px;
+}
+
+.math-rows { display: grid; gap: 10px; }
+
+.math-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.math-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.math-row .label { color: var(--text-3); }
+.math-row .value { font-family: var(--mono); font-size: 13px; color: var(--text-2); }
+
+.math-row.total .label { color: var(--text); font-weight: 590; font-size: 15px; }
+.math-row.total .value { color: var(--lime); font-size: 18px; font-weight: 590; }
+
+.math-note {
+  font-size: 12px;
+  color: var(--text-4);
+  margin-top: 12px;
+  font-family: var(--mono);
+}
+
+/* IDENTITY BLOCK */
+.identity-block {
+  background: var(--surface-1);
+  border: 1px solid var(--border-2);
+  border-left: 2px solid var(--lime);
+  border-radius: 0 var(--r-card) var(--r-card) 0;
+  padding: 18px 20px;
+  margin: 16px 0;
+}
+
+.identity-tagline {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+  letter-spacing: -0.15px;
+  margin-bottom: 14px;
+}
+
+.identity-block ul {
+  list-style: none;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.identity-block ul li {
+  padding: 4px 0;
+  line-height: 1.5;
+}
+
+.identity-block ul li::before { content: '· '; color: var(--text-4); }
+
+/* DAILY OPS */
+.ops-list { list-style: none; margin: 16px 0; }
+
+.ops-list li {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.ops-list li:last-child { border-bottom: none; }
+
+.ops-num {
+  width: 28px;
+  height: 28px;
+  background: var(--surface-3);
+  border: 1px solid var(--border-2);
+  color: var(--text-3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.ops-title {
+  font-size: 13px;
+  font-weight: 510;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.ops-desc {
+  font-size: 12px;
+  color: var(--text-4);
+}
+
+/* DELIVERABLES */
+.deliverables-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.d-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-card);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.d-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-4);
+  margin-bottom: 6px;
+}
+
+.d-title {
+  font-size: 14px;
+  font-weight: 510;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.d-card p { font-size: 13px; color: var(--text-3); margin: 0; }
+
+.constraint-box {
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-card);
+  padding: 14px 16px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.constraint-box strong {
+  color: var(--text-2);
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+/* COMPANION */
+.companion {
+  margin-top: 64px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-4);
+}
+
+code {
+  background: var(--surface-3);
+  color: var(--text-2);
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: var(--r-badge);
+}
+
+/* BADGE */
+.badge {
+  display: inline-block;
+  background: var(--surface-3);
+  color: var(--text-3);
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: var(--r-badge);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- NAV -->
+  <nav>
+    <span class="logo">Xchool OS</span>
+    <ul>
+      <li><span class="nav-section">Overview</span></li>
+      <li><a href="#seven-areas">The 7 Areas</a></li>
+
+      <li><span class="nav-section">Scale</span></li>
+      <li><a href="#individual">Individual</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#school">School / Org</a></li>
+
+      <li><span class="nav-section">Money</span></li>
+      <li><a href="#model-shift">Model Shift</a></li>
+      <li><a href="#pricing">Pricing Tiers</a></li>
+      <li><a href="#math">Compounding Math</a></li>
+
+      <li><span class="nav-section">Identity</span></li>
+      <li><a href="#selling">What You're Selling</a></li>
+      <li><a href="#daily-ops">Daily Ops</a></li>
+      <li><a href="#flywheel">The Flywheel</a></li>
+
+      <li><span class="nav-section">Infra</span></li>
+      <li><a href="#deliverables">Deliverables</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <div class="hero" id="top">
+      <div class="eyebrow">Xchool Intelligence Layer</div>
+      <h1>7 Areas.<br>Scaled. Recurring.</h1>
+      <p class="hero-desc">
+        One system. Seven sections. Updated daily.
+        Sessions are <strong>onboarding</strong>. Maintenance is <strong>recurring revenue</strong>.
+        The session is the Trojan horse. The intelligence layer running is the kingdom.
+      </p>
+    </div>
+
+    <!-- 7 AREAS -->
+    <section id="seven-areas">
+      <div class="eyebrow">The System</div>
+      <h2>The 7 Areas</h2>
+      <p>One system. Seven sections. Updated daily. This is the product.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Area</th>
+              <th>Daily Question</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Goals, rubrics, wins</td><td>What am I aiming at? How do I know I hit it?</td></tr>
+            <tr><td>2</td><td>Outputs, workflows, agents</td><td>What gets done? Who/what does each step?</td></tr>
+            <tr><td>3</td><td>Current state, progress</td><td>Where am I now? What's blocked? What's today?</td></tr>
+            <tr><td>4</td><td>Context, logs, learning</td><td>What am I capturing? What's compounding?</td></tr>
+            <tr><td>5</td><td>People, profiles, shared context</td><td>Who am I with? What do they need?</td></tr>
+            <tr><td>6</td><td>Tools, setups, environment</td><td>How does everything connect? What's the friction?</td></tr>
+            <tr><td>7</td><td>Shared intelligence, organisation</td><td>What am I giving to others? What's coming back?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SCALE -->
+    <section id="individual">
+      <div class="eyebrow">Scale</div>
+      <h2>Three Levels, Same 7 Sections</h2>
+
+      <!-- SVG flow diagram -->
+      <div class="diagram-wrap">
+        <svg width="600" height="80" viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="16" width="155" height="48" rx="6" fill="#0f1011" stroke="#34343a" stroke-width="1"/>
+          <text x="77" y="36" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="510" fill="#f7f8f8" text-anchor="middle">Individual</text>
+          <text x="77" y="52" font-family="ui-monospace,monospace" font-size="10" fill="#8a8f98" text-anchor="middle">1 person · Notion</text>
+
+          <line x1="157" y1="40" x2="197" y2="40" stroke="#34343a" stroke-width="1" marker-end="url(#arr)"/>
+
+          <rect x="199" y="16" width="200" height="48" rx="6" fill="#161718" stroke="#e4f222" stroke-width="1"/>
+          <text x="299" y="36" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="510" fill="#f7f8f8" text-anchor="middle">Team</text>
+          <text x="299" y="52" font-family="ui-monospace,monospace" font-size="10" fill="#8a8f98" text-anchor="middle">3–15 · Discord + Airtable</text>
+
+          <line x1="401" y1="40" x2="441" y2="40" stroke="#34343a" stroke-width="1" marker-end="url(#arr)"/>
+
+          <rect x="443" y="16" width="155" height="48" rx="6" fill="#0f1011" stroke="#34343a" stroke-width="1"/>
+          <text x="520" y="36" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="510" fill="#f7f8f8" text-anchor="middle">School / Org</text>
+          <text x="520" y="52" font-family="ui-monospace,monospace" font-size="10" fill="#8a8f98" text-anchor="middle">30+ · Principal queries</text>
+
+          <defs>
+            <marker id="arr" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L7,3 z" fill="#34343a"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="level-grid">
+        <div class="level-card">
+          <div class="level-label">Level 1</div>
+          <div class="level-title">Individual</div>
+          <div class="level-meta">1 person · Notion · 5 min/day</div>
+          <ul>
+            <li>Goals: what winning looks like this month</li>
+            <li>Outputs: what's in motion, what agents run</li>
+            <li>Progress: today's actions, what's blocked</li>
+            <li>Context: what compounded, new data</li>
+            <li>People: follow-up, interaction log</li>
+            <li>Tools: what's connected, what's friction</li>
+            <li>Shared: what you put out, what came back</li>
+          </ul>
+        </div>
+
+        <div class="level-card" id="team">
+          <div class="level-label">Level 2</div>
+          <div class="level-title">Team</div>
+          <div class="level-meta">3–15 people · Discord + Airtable</div>
+          <ul>
+            <li>Shared rubrics aligned from individual up</li>
+            <li>Shared wiki: collective knowledge, findable</li>
+            <li>Shared progress: who's building what</li>
+            <li>Exchange: one breakthrough feeds everyone</li>
+            <li>Team lead queries patterns and blockers</li>
+            <li>Private stays private. Team owns aggregation only.</li>
+          </ul>
+        </div>
+
+        <div class="level-card" id="school">
+          <div class="level-label">Level 3</div>
+          <div class="level-title">School / Org</div>
+          <div class="level-meta">30+ people · Principal queries brain</div>
+          <ul>
+            <li>Rubrics flow down: org defines, dept adapts</li>
+            <li>Context flows up: individual to org</li>
+            <li>Principal: what's blocked, what's improving</li>
+            <li>Dept head: vertical view, teacher progress</li>
+            <li>Teacher: students, growth evidence</li>
+            <li>EDB/board: living data, not reports</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODEL SHIFT -->
+    <section id="model-shift">
+      <div class="eyebrow">Money</div>
+      <h2>The Model Shift</h2>
+
+      <div class="compare-row">
+        <div class="compare-card old">
+          <div class="c-tag">Old model</div>
+          <div class="c-title">Sell Sessions</div>
+          <p>One-shot revenue. $10K here, $500 there. No floor. No compounding.</p>
+        </div>
+        <div class="compare-card new">
+          <div class="c-tag">New model</div>
+          <div class="c-title">Sell Intelligence Layer Ownership</div>
+          <p>Session = build it. Monthly = keep it running and keep it compounding. Recurring floor that grows.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <h2>Pricing Tiers</h2>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>What You Sell</th>
+              <th>Price</th>
+              <th>Frequency</th>
+              <th>Revenue Potential</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Free session: "Build Your Intelligence Layer"</td>
+              <td class="num">$0</td>
+              <td>Weekly</td>
+              <td>Lead gen + proof engine</td>
+            </tr>
+            <tr>
+              <td>Build: individual intelligence layer (3h)</td>
+              <td class="num">$500/person</td>
+              <td>As booked (15 max)</td>
+              <td>$7.5K/session</td>
+            </tr>
+            <tr>
+              <td>Maintain: intelligence layer running</td>
+              <td class="num">$200/mo</td>
+              <td>Monthly recurring</td>
+              <td class="highlight">$20K/mo at 100</td>
+            </tr>
+            <tr>
+              <td>Team build: team intelligence layer</td>
+              <td class="num">$2–3K/session</td>
+              <td>As booked</td>
+              <td>Pipeline to org</td>
+            </tr>
+            <tr>
+              <td>Team maintain: team layer running</td>
+              <td class="num">$500–1K/mo</td>
+              <td>Monthly recurring</td>
+              <td class="highlight">$3.75K/mo at 5</td>
+            </tr>
+            <tr>
+              <td>Org build: org intelligence layer scoped</td>
+              <td class="num">$10K/engagement</td>
+              <td>Per engagement</td>
+              <td>High-touch, high-value</td>
+            </tr>
+            <tr>
+              <td>Org maintain: continuous intelligence</td>
+              <td class="num">$2–5K/mo</td>
+              <td>Monthly recurring</td>
+              <td class="highlight">$9K/mo at 3 orgs</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- MATH -->
+    <section id="math">
+      <h2>Compounding Math</h2>
+
+      <div class="math-box">
+        <div class="math-title">Monthly Recurring Floor</div>
+        <div class="math-rows">
+          <div class="math-row">
+            <span class="label">100 individual members × $200/mo</span>
+            <span class="value">$20,000</span>
+          </div>
+          <div class="math-row">
+            <span class="label">5 teams × ~$750/mo</span>
+            <span class="value">$3,750</span>
+          </div>
+          <div class="math-row">
+            <span class="label">3 orgs × ~$3K/mo</span>
+            <span class="value">$9,000</span>
+          </div>
+          <div class="math-row total">
+            <span class="label">Recurring floor</span>
+            <span class="value">$32,750/mo</span>
+          </div>
+        </div>
+      </div>
+      <p class="math-note">+ one-shot sessions layered on top. Moat: each month running = more data = switching cost increases = retention compounds.</p>
+    </section>
+
+    <!-- SELLING -->
+    <section id="selling">
+      <div class="eyebrow">Identity</div>
+      <h2>What You're Really Selling</h2>
+
+      <p>Not AI training. Not edtech consulting. Not workflow optimisation.</p>
+
+      <div class="identity-block">
+        <div class="identity-tagline">"I help you become the kind of person whose intelligence compounds instead of decays."</div>
+        <ul>
+          <li>The version of yourself that never wastes a day of learning</li>
+          <li>The version that knows exactly where you are, where you're going, and what's blocking</li>
+          <li>The person you know you should be but haven't figured out how to become alone</li>
+        </ul>
+      </div>
+
+      <div class="tbl-wrap" style="margin-top:16px;">
+        <table>
+          <thead>
+            <tr><th>Company</th><th>Made Possible</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Anthropic</td><td>Frontier safety researchers</td></tr>
+            <tr><td>Palantir</td><td>Forward-deployed engineers</td></tr>
+            <tr><td style="color:var(--lime);">Xchool</td><td style="color:var(--text-2); font-weight:510;">Intelligence-owning educators</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:14px; font-size:13px;">Tool companies create tool users. <strong style="color:var(--text);">Xchool creates intelligence owners.</strong></p>
+    </section>
+
+    <!-- DAILY OPS -->
+    <section id="daily-ops">
+      <div class="eyebrow">Execution</div>
+      <h2>Daily Ops</h2>
+
+      <ol class="ops-list">
+        <li>
+          <div class="ops-num">1</div>
+          <div>
+            <div class="ops-title">Update your 7 sections</div>
+            <div class="ops-desc">What moved yesterday. What's today. 5 minutes.</div>
+          </div>
+        </li>
+        <li>
+          <div class="ops-num">2</div>
+          <div>
+            <div class="ops-title">Post one proof</div>
+            <div class="ops-desc">One screenshot. One insight. From your intelligence layer. LinkedIn or X.</div>
+          </div>
+        </li>
+        <li>
+          <div class="ops-num">3</div>
+          <div>
+            <div class="ops-title">Run or prep one session</div>
+            <div class="ops-desc">Free or paid. Ship something. Doesn't matter which.</div>
+          </div>
+        </li>
+        <li>
+          <div class="ops-num">4</div>
+          <div>
+            <div class="ops-title">DM 5 people</div>
+            <div class="ops-desc">Ask. Introduce. Close. Sales never stops.</div>
+          </div>
+        </li>
+        <li>
+          <div class="ops-num">5</div>
+          <div>
+            <div class="ops-title">Capture everything back</div>
+            <div class="ops-desc">Session notes. Conversations. Insights. No data wasted.</div>
+          </div>
+        </li>
+        <li>
+          <div class="ops-num">6</div>
+          <div>
+            <div class="ops-title">Close one yes/no</div>
+            <div class="ops-desc">A sale. An intro. A price. A date. Move one thing forward.</div>
+          </div>
+        </li>
+        <li>
+          <div class="ops-num">7</div>
+          <div>
+            <div class="ops-title">Close the day</div>
+            <div class="ops-desc">Update progress section. What moved today. What's tomorrow.</div>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- FLYWHEEL -->
+    <section id="flywheel">
+      <div class="eyebrow">The Loop</div>
+      <h2>The Flywheel</h2>
+
+      <div class="diagram-wrap">
+        <svg width="580" height="280" viewBox="0 0 580 280" xmlns="http://www.w3.org/2000/svg">
+          <!-- Center -->
+          <circle cx="290" cy="140" r="50" fill="#161718" stroke="#34343a" stroke-width="1"/>
+          <text x="290" y="133" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="510" fill="#f7f8f8" text-anchor="middle">Intelligence</text>
+          <text x="290" y="150" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="510" fill="#e4f222" text-anchor="middle">Layer</text>
+          <text x="290" y="165" font-family="ui-monospace,monospace" font-size="9" fill="#8a8f98" text-anchor="middle">running</text>
+
+          <!-- Node 1 top -->
+          <rect x="200" y="4" width="180" height="36" rx="6" fill="#0f1011" stroke="#34343a" stroke-width="1"/>
+          <text x="290" y="19" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" font-weight="510" fill="#f7f8f8" text-anchor="middle">Run layer publicly</text>
+          <text x="290" y="33" font-family="ui-monospace,monospace" font-size="9" fill="#8a8f98" text-anchor="middle">People see it</text>
+
+          <!-- Node 2 right-top -->
+          <rect x="450" y="60" width="124" height="36" rx="6" fill="#0f1011" stroke="#34343a" stroke-width="1"/>
+          <text x="512" y="75" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" font-weight="510" fill="#f7f8f8" text-anchor="middle">Free session</text>
+          <text x="512" y="89" font-family="ui-monospace,monospace" font-size="9" fill="#8a8f98" text-anchor="middle">Teaches them</text>
+
+          <!-- Node 3 right-bottom -->
+          <rect x="450" y="178" width="124" height="36" rx="6" fill="#0f1011" stroke="#34343a" stroke-width="1"/>
+          <text x="512" y="193" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" font-weight="510" fill="#f7f8f8" text-anchor="middle">Paid build</text>
+          <text x="512" y="207" font-family="ui-monospace,monospace" font-size="9" fill="#e4f222" text-anchor="middle">$500/person</text>
+
+          <!-- Node 4 bottom -->
+          <rect x="200" y="238" width="180" height="36" rx="6" fill="#0f1011" stroke="#e4f222" stroke-width="1"/>
+          <text x="290" y="253" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" font-weight="510" fill="#f7f8f8" text-anchor="middle">Monthly maintenance</text>
+          <text x="290" y="267" font-family="ui-monospace,monospace" font-size="9" fill="#e4f222" text-anchor="middle">$200/mo recurring</text>
+
+          <!-- Node 5 left-bottom -->
+          <rect x="8" y="178" width="124" height="36" rx="6" fill="#0f1011" stroke="#34343a" stroke-width="1"/>
+          <text x="70" y="193" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" font-weight="510" fill="#f7f8f8" text-anchor="middle">Proof feeds proof</text>
+          <text x="70" y="207" font-family="ui-monospace,monospace" font-size="9" fill="#8a8f98" text-anchor="middle">More people see it</text>
+
+          <!-- Node 6 left-top -->
+          <rect x="8" y="60" width="124" height="36" rx="6" fill="#0f1011" stroke="#34343a" stroke-width="1"/>
+          <text x="70" y="75" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" font-weight="510" fill="#f7f8f8" text-anchor="middle">They want theirs</text>
+          <text x="70" y="89" font-family="ui-monospace,monospace" font-size="9" fill="#8a8f98" text-anchor="middle">Demand created</text>
+
+          <!-- Arrows clockwise -->
+          <path d="M380,22 Q440,22 452,66" fill="none" stroke="#34343a" stroke-width="1" marker-end="url(#a)"/>
+          <path d="M512,96 L512,178" fill="none" stroke="#34343a" stroke-width="1" marker-end="url(#a)"/>
+          <path d="M452,196 Q400,220 382,240" fill="none" stroke="#34343a" stroke-width="1" marker-end="url(#a)"/>
+          <path d="M200,254 Q140,250 134,210" fill="none" stroke="#34343a" stroke-width="1" marker-end="url(#a)"/>
+          <path d="M70,178 L70,96" fill="none" stroke="#34343a" stroke-width="1" marker-end="url(#a)"/>
+          <path d="M132,76 Q175,42 200,24" fill="none" stroke="#34343a" stroke-width="1" marker-end="url(#a)"/>
+
+          <defs>
+            <marker id="a" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L7,3 z" fill="#34343a"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <p style="font-size:12px; color:var(--text-4); font-family:var(--mono);">
+        The session is the Trojan horse. The intelligence layer running is the kingdom.
+      </p>
+    </section>
+
+    <!-- DELIVERABLES -->
+    <section id="deliverables">
+      <div class="eyebrow">Infrastructure</div>
+      <h2>Deliverables</h2>
+
+      <div class="deliverables-grid">
+        <div class="d-card">
+          <div class="d-label">Messy exchange</div>
+          <div class="d-title">Discord</div>
+          <p>Real-time flow during sessions. Screenshots, links, chat. What's working, what's missing. Messy. Alive.</p>
+        </div>
+        <div class="d-card">
+          <div class="d-label">Structured truth</div>
+          <div class="d-title">Airtable via Fillout</div>
+          <p>Post-session mandatory form. 4 fields. Link to what they built. What's missing. Rating 1-5. What's next.</p>
+        </div>
+      </div>
+
+      <div class="constraint-box">
+        <strong>The constraint that solves everything</strong>
+        4 fields. Link to what you built. What's missing. Rating (1-5). What's next. No form = no contribution counted. No exceptions.
+      </div>
+
+      <div class="constraint-box">
+        <strong>Why not Notion/Google Docs</strong>
+        You don't own their data and shouldn't. They build inside their own intelligence layer. You own the protocol, not the data.
+      </div>
+    </section>
+
+    <div class="companion">
+      Companion: <code>10-topics-full-synthesis.md</code> — One is the curriculum. This is the OS.
+    </div>
+
+  </main>
+</div>
+
+<script>
+const sections = document.querySelectorAll('section[id], .hero');
+const links = document.querySelectorAll('nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, { threshold: 0.25 });
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
