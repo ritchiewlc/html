@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company Building Roadmap</title>
+<style>
+:root {
+  --bg: #08090a;
+  --surface-1: #0f1011;
+  --surface-2: #161718;
+  --surface-3: #23252a;
+  --border: #23252a;
+  --border-2: #34343a;
+  --text: #f7f8f8;
+  --text-2: #d0d6e0;
+  --text-3: #8a8f98;
+  --text-4: #62666d;
+  --lime: #e4f222;
+  --sans: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --r-card: 6px;
+  --r-pill: 9999px;
+  --r-badge: 4px;
+  --r-tag: 2px;
+  --shadow-card: rgba(0,0,0,0.4) 0px 2px 4px 0px;
+  --shadow-inset: rgb(35,37,42) 0px 0px 0px 1px inset;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.13px;
+}
+
+/* Nav */
+.topbar { position: sticky; top: 0; z-index: 100; background: var(--surface-1); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; align-items: center; height: 44px; gap: 24px; }
+.topbar-logo { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
+.topbar-nav { display: flex; gap: 4px; overflow-x: auto; flex: 1; -webkit-overflow-scrolling: touch; }
+.topbar-nav a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-4); text-decoration: none; padding: 4px 8px; border-radius: var(--r-tag); white-space: nowrap; }
+.topbar-nav a:hover { color: var(--text-2); background: var(--surface-2); }
+.topbar-nav a.active { color: var(--lime); background: var(--surface-2); }
+.menu-btn { display: none; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); background: none; border: 1px solid var(--border); border-radius: var(--r-tag); padding: 4px 10px; cursor: pointer; }
+
+/* Layout */
+main { max-width: 1120px; margin: 0 auto; padding: 32px; }
+header { margin-bottom: 48px; }
+h1 { font-size: 28px; font-weight: 590; letter-spacing: -0.22px; color: var(--text); }
+.header-meta { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-top: 8px; }
+.header-desc { margin-top: 12px; color: var(--text-2); max-width: 640px; }
+
+/* Stage */
+.stage { margin-bottom: 32px; }
+.stage-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.stage-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
+.stage-count { font-family: var(--mono); font-size: 10px; color: var(--text-4); }
+
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.card-header { display: flex; align-items: baseline; gap: 8px; }
+.card-name { font-size: 13px; font-weight: 590; color: var(--text); flex: 1; }
+.card-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: var(--r-badge); background: var(--surface-3); color: var(--text-3); white-space: nowrap; }
+.card-tag.lime { background: var(--lime); color: #08090a; }
+.card-why { font-size: 12px; color: var(--text-2); line-height: 1.45; }
+.card-how { font-size: 11px; color: var(--text-3); font-style: italic; }
+.card-deps { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; }
+.dep-badge { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; padding: 1px 6px; border-radius: var(--r-tag); border: 1px solid var(--border-2); color: var(--text-4); }
+.dep-badge.unlocks { border-color: var(--border-2); color: var(--text-3); }
+
+/* Dependency Tree */
+.tree-section { margin-top: 48px; }
+.tree-section h2 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+.diagram-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r-card); padding: 24px; }
+
+/* Stage details (collapsible) */
+.card-detail { background: var(--surface-2); border-radius: var(--r-card); box-shadow: var(--shadow-inset); padding: 12px; }
+.card-detail summary { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); cursor: pointer; list-style: none; }
+.card-detail summary::-webkit-details-marker { display: none; }
+.card-detail summary::before { content: "+ "; color: var(--text-4); }
+.card-detail[open] summary::before { content: "- "; color: var(--lime); }
+.detail-row { display: flex; gap: 8px; margin-top: 6px; font-size: 11px; }
+.detail-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; color: var(--text-4); min-width: 70px; }
+.detail-value { color: var(--text-3); }
+
+/* Missing section */
+.missing { margin-top: 48px; }
+.missing h2 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+.missing-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.missing-item { background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--r-card); padding: 12px; font-size: 12px; color: var(--text-3); }
+
+/* Footer */
+footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); }
+footer p { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; color: var(--text-4); }
+
+/* Mobile */
+@media (max-width: 768px) {
+  main { padding: 16px; }
+  h1 { font-size: 22px; }
+  .cards { grid-template-columns: 1fr; }
+  .topbar { padding: 0 16px; gap: 12px; }
+  .topbar-nav { display: none; }
+  .menu-btn { display: block; }
+  .topbar-nav.open { display: flex; flex-direction: column; position: absolute; top: 44px; left: 0; right: 0; background: var(--surface-1); border-bottom: 1px solid var(--border); padding: 8px 16px; gap: 2px; }
+  .missing-list { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  main { padding: 12px; }
+  h1 { font-size: 20px; }
+}
+
+/* SVG */
+text.title { font-family: var(--mono); font-size: 9px; fill: #8a8f98; letter-spacing: 0.1em; }
+text.card-title { font-family: var(--sans); font-size: 10px; fill: #f7f8f8; font-weight: 590; }
+text.card-sub { font-family: var(--sans); font-size: 8px; fill: #62666d; }
+</style>
+</head>
+<body>
+
+<nav class="topbar" id="topbar">
+  <span class="topbar-logo">Cofounder Roadmap</span>
+  <div class="topbar-nav" id="topnav">
+    <a href="#idea">Idea</a>
+    <a href="#initial">Initial</a>
+    <a href="#identity">Identity</a>
+    <a href="#build">Build</a>
+    <a href="#gtm">GTM</a>
+    <a href="#launch">Launch</a>
+    <a href="#scale">Scale</a>
+    <a href="#mature">Mature</a>
+    <a href="#tree">Tree</a>
+    <a href="#missing">Missing</a>
+  </div>
+  <button class="menu-btn" onclick="document.getElementById('topnav').classList.toggle('open')">Menu</button>
+</nav>
+
+<main>
+
+<header>
+  <h1>Company Building Roadmap</h1>
+  <p class="header-meta">8 stages &middot; 35 milestones &middot; dependency-chained</p>
+  <p class="header-desc">Captured from Cofounder's Tech Tree. Each step unlocks the next. Cofounder-specific tool names generalized.</p>
+</header>
+
+<!-- IDEA -->
+<section class="stage" id="idea">
+  <div class="stage-header"><span class="stage-title">Idea</span><span class="stage-count">1 milestone</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header"><span class="card-name">Initial idea</span><span class="card-tag lime">anchor</span></div>
+      <p class="card-why">Company concept exists as a usable starting point. Everything else forks from here.</p>
+      <div class="card-deps"><span class="dep-badge unlocks">unlocks 5 downstream</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INITIAL -->
+<section class="stage" id="initial">
+  <div class="stage-header"><span class="stage-title">Initial</span><span class="stage-count">3 milestones</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header"><span class="card-name">Pick a company name</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Name ready to carry into domains, brand, and launch. Map the category, avoid generics, explore directions, score on memorability and fit.</p>
+      <div class="card-deps"><span class="dep-badge">requires: initial idea</span><span class="dep-badge unlocks">unlocks: marketing site, social, domain, brand</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Prepare repository</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Managed product repo and app foundation ready for building.</p>
+      <div class="card-deps"><span class="dep-badge">requires: initial idea</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Incorporate LLC</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Legal entity protects personal assets, enables business bank account and fundraising. Record status, capture founder approval.</p>
+      <div class="card-deps"><span class="dep-badge">requires: initial idea</span><span class="dep-badge unlocks">unlocks: bank account</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section class="stage" id="identity">
+  <div class="stage-header"><span class="stage-title">Identity</span><span class="stage-count">5 milestones</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header"><span class="card-name">Buy domain</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Custom domain anchors email, website, and product deployment. Lock it in early.</p>
+      <div class="card-deps"><span class="dep-badge">requires: company name</span><span class="dep-badge unlocks">unlocks: outbound email</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Brand identity</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Lock brand kit and design system before downstream design work starts.</p>
+      <div class="card-deps"><span class="dep-badge">requires: company name</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Setup social presence</span><span class="card-tag">founder</span></div>
+      <p class="card-why">LinkedIn and X profiles live early so you build audience before product exists.</p>
+      <div class="card-deps"><span class="dep-badge">requires: company name</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Define positioning</span><span class="card-tag">approval</span></div>
+      <p class="card-why">Clear language for who the product serves and why buyers should care. Output: approved positioning doc.</p>
+      <div class="card-deps"><span class="dep-badge">requires: initial idea</span><span class="dep-badge unlocks">unlocks: blog, prospects, paid ads</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Open bank account</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Separates personal and company finances. Required for bookkeeping and professional presence.</p>
+      <div class="card-deps"><span class="dep-badge">requires: incorporate LLC</span><span class="dep-badge unlocks">unlocks: bookkeeping</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILD -->
+<section class="stage" id="build">
+  <div class="stage-header"><span class="stage-title">Build</span><span class="stage-count">8 milestones</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header"><span class="card-name">Build app</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Core product exists so onboarding, launch, and GTM work can connect.</p>
+      <div class="card-deps"><span class="dep-badge">requires: initial idea</span><span class="dep-badge unlocks">unlocks: auth, launch</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Add auth</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Users, sessions, redirects, production sign-in. Turns project into a real application surface.</p>
+      <div class="card-deps"><span class="dep-badge">requires: build app</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Set up transactional email</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Reliable auth, invite, notification, and lifecycle emails for the product.</p>
+      <div class="card-deps"><span class="dep-badge">requires: buy domain</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Build marketing website</span><span class="card-tag">agent</span></div>
+      <p class="card-why">First public sales surface. Build until founder can inspect it.</p>
+      <div class="card-deps"><span class="dep-badge">requires: company name</span><span class="dep-badge unlocks">unlocks: launch marketing site</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Setup outbound email</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Company domain set up as sender before customer outreach begins.</p>
+      <div class="card-deps"><span class="dep-badge">requires: buy domain</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Connect social scheduling</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Scheduling tool linked so social posts can be published on schedule.</p>
+      <div class="card-deps"><span class="dep-badge">requires: setup social presence</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Gather prospects</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Concrete list of accounts and people to pursue for sales. CRM context saved.</p>
+      <div class="card-deps"><span class="dep-badge">requires: define positioning</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Setup bookkeeping</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Clean financial records from day one. Accounting tool connected to bank account.</p>
+      <div class="card-deps"><span class="dep-badge">requires: open bank account</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GTM -->
+<section class="stage" id="gtm">
+  <div class="stage-header"><span class="stage-title">GTM</span><span class="stage-count">4 milestones</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header"><span class="card-name">Write blog posts</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Blog builds organic traffic and thought leadership. Every post compounds over time.</p>
+      <div class="card-deps"><span class="dep-badge">requires: define positioning</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Grow social presence</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Consistent engagement and content builds an audience that becomes a moat.</p>
+      <div class="card-deps"><span class="dep-badge">requires: connect social scheduling</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Send cold outreach</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Approved outbound emails sent, CRM has the activity trail.</p>
+      <div class="card-deps"><span class="dep-badge">requires: gather prospects</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Run paid acquisition</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Paid ads buy attention while organic channels build. Fastest way to test messaging and generate inbound.</p>
+      <div class="card-deps"><span class="dep-badge">requires: define positioning</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LAUNCH -->
+<section class="stage" id="launch">
+  <div class="stage-header"><span class="stage-title">Launch</span><span class="stage-count">4 milestones</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header"><span class="card-name">Launch app</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Managed production launch ready for real traffic. Deployment in place.</p>
+      <div class="card-deps"><span class="dep-badge">requires: build app</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Launch marketing website</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Marketing website live at a URL customers can visit. DNS verified.</p>
+      <div class="card-deps"><span class="dep-badge">requires: build marketing website</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Expand content engine</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Lead magnets and newsletter turn one-time visitors into an owned audience with no algorithm in the way.</p>
+      <div class="card-deps"><span class="dep-badge">requires: write blog posts</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Qualify opportunities</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Raw replies and meetings turned into a manageable pipeline with CRM stages.</p>
+      <div class="card-deps"><span class="dep-badge">requires: send cold outreach</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCALE -->
+<section class="stage" id="scale">
+  <div class="stage-header"><span class="stage-title">Scale</span><span class="stage-count">7 milestones</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header"><span class="card-name">Add monitoring</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Analytics and feedback loops turn production signals into product improvement cadence.</p>
+      <div class="card-deps"><span class="dep-badge">requires: launch marketing website, launch app</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Optimize SEO</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Website becomes a machine that attracts qualified leads while you sleep. Months to compound, start early.</p>
+      <div class="card-deps"><span class="dep-badge">requires: write blog posts</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Start community</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Customers turned into advocates. Word of mouth and feedback loop.</p>
+      <div class="card-deps"><span class="dep-badge">requires: grow social presence</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Close deals</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Deal close work explicit: terms, approvals, paperwork, payment, handoff.</p>
+      <div class="card-deps"><span class="dep-badge">requires: qualify opportunities</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Onboard accounts</span><span class="card-tag">agent</span></div>
+      <p class="card-why">Clean handoff for closed accounts: success criteria, owner, first value milestone.</p>
+      <div class="card-deps"><span class="dep-badge">requires: close deals</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Add billing</span><span class="card-tag">approval</span></div>
+      <p class="card-why">Pricing configured, payment processor connected, setup approved. Must be done before revenue collection.</p>
+      <div class="card-deps"><span class="dep-badge">no hard dependency</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Setup support</span><span class="card-tag">system</span></div>
+      <p class="card-why">Support surface exists to handle customer workflows.</p>
+      <div class="card-deps"><span class="dep-badge">requires: launch app</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MATURE -->
+<section class="stage" id="mature">
+  <div class="stage-header"><span class="stage-title">Mature</span><span class="stage-count">3 milestones</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header"><span class="card-name">Launch referral program</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Referral program turns customers into salespeople. Referrals convert at 3-5x cold outbound.</p>
+      <div class="card-deps"><span class="dep-badge">requires: onboard accounts</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Legal &amp; compliance</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Terms of service, privacy policy, data compliance. Protects legally and builds enterprise trust.</p>
+      <div class="card-deps"><span class="dep-badge">no hard dependency</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-name">Integrate chat widget</span><span class="card-tag">founder</span></div>
+      <p class="card-why">Proactive chat catches visitors at peak intent, converts before they bounce.</p>
+      <div class="card-deps"><span class="dep-badge">requires: setup support</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPENDENCY TREE -->
+<section class="tree-section" id="tree">
+  <h2>Dependency Map</h2>
+  <div class="diagram-wrap">
+    <svg width="1040" height="920" viewBox="0 0 1040 920" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#34343a"/></marker>
+        <marker id="arrow-lime" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e4f222"/></marker>
+      </defs>
+
+      <!-- Initial Idea (root) -->
+      <rect x="480" y="10" width="140" height="28" rx="4" fill="#0f1011" stroke="#34343a" stroke-width="1"/>
+      <text x="550" y="28" text-anchor="middle" class="card-title" fill="#e4f222">Initial idea</text>
+
+      <!-- Branch lines from root -->
+      <line x1="530" y1="38" x2="530" y2="52" stroke="#34343a" stroke-width="1"/>
+      <line x1="150" y1="52" x2="910" y2="52" stroke="#23252a" stroke-width="1"/>
+
+      <!-- Level 1 nodes -->
+      <!-- Pick company name -->
+      <line x1="130" y1="52" x2="130" y2="66" stroke="#34343a" stroke-width="1"/>
+      <rect x="30" y="66" width="200" height="24" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="130" y="82" text-anchor="middle" class="card-title">Pick company name</text>
+
+      <!-- Prepare repository -->
+      <line x1="400" y1="52" x2="400" y2="66" stroke="#34343a" stroke-width="1"/>
+      <rect x="300" y="66" width="200" height="24" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="400" y="82" text-anchor="middle" class="card-title">Prepare repository</text>
+
+      <!-- Incorporate LLC -->
+      <line x1="620" y1="52" x2="620" y2="66" stroke="#34343a" stroke-width="1"/>
+      <rect x="520" y="66" width="200" height="24" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="620" y="82" text-anchor="middle" class="card-title">Incorporate LLC</text>
+
+      <!-- Define positioning -->
+      <line x1="880" y1="52" x2="880" y2="66" stroke="#34343a" stroke-width="1"/>
+      <rect x="780" y="66" width="200" height="24" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="880" y="82" text-anchor="middle" class="card-title">Define positioning</text>
+
+      <!-- Build app -->
+      <line x1="550" y1="38" x2="550" y2="110" stroke="#34343a" stroke-width="1"/>
+      <rect x="430" y="110" width="240" height="24" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="550" y="126" text-anchor="middle" class="card-title">Build app</text>
+
+      <!-- Level 2 nodes from company name -->
+      <line x1="80" y1="90" x2="80" y2="120" stroke="#34343a" stroke-width="1"/>
+      <rect x="10" y="120" width="140" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="80" y="135" text-anchor="middle" class="card-title">Buy domain</text>
+
+      <line x1="180" y1="90" x2="180" y2="120" stroke="#34343a" stroke-width="1"/>
+      <rect x="110" y="120" width="140" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="180" y="135" text-anchor="middle" class="card-title">Brand identity</text>
+
+      <line x1="260" y1="90" x2="260" y2="120" stroke="#34343a" stroke-width="1"/>
+      <rect x="190" y="120" width="140" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="260" y="135" text-anchor="middle" class="card-title">Setup social</text>
+
+      <line x1="80" y1="142" x2="80" y2="155" stroke="#34343a" stroke-width="1"/>
+      <line x1="180" y1="142" x2="180" y2="155" stroke="#34343a" stroke-width="1"/>
+      <line x1="260" y1="155" x2="260" y2="168" stroke="#34343a" stroke-width="1"/>
+
+      <!-- From incorporate LLC -->
+      <line x1="620" y1="90" x2="620" y2="120" stroke="#34343a" stroke-width="1"/>
+      <rect x="530" y="120" width="180" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="620" y="135" text-anchor="middle" class="card-title">Open bank account</text>
+
+      <!-- From define positioning -->
+      <line x1="820" y1="90" x2="820" y2="120" stroke="#34343a" stroke-width="1"/>
+      <rect x="750" y="120" width="140" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="820" y="135" text-anchor="middle" class="card-title">Write blog posts</text>
+
+      <line x1="940" y1="90" x2="940" y2="120" stroke="#34343a" stroke-width="1"/>
+      <rect x="870" y="120" width="140" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="940" y="135" text-anchor="middle" class="card-title">Gather prospects</text>
+
+      <line x1="880" y1="90" x2="880" y2="135" stroke="#34343a" stroke-width="1"/>
+
+      <!-- From build app -->
+      <line x1="500" y1="134" x2="500" y2="165" stroke="#34343a" stroke-width="1"/>
+      <rect x="440" y="165" width="120" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="500" y="180" text-anchor="middle" class="card-title">Add auth</text>
+
+      <line x1="600" y1="134" x2="600" y2="165" stroke="#34343a" stroke-width="1"/>
+      <rect x="540" y="165" width="120" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="600" y="180" text-anchor="middle" class="card-title">Launch app</text>
+
+      <!-- Level 3 -->
+      <!-- From buy domain -->
+      <line x1="50" y1="142" x2="50" y2="200" stroke="#34343a" stroke-width="1"/>
+      <rect x="10" y="200" width="80" height="36" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="50" y="215" text-anchor="middle" class="card-title">Outbound</text>
+      <text x="50" y="228" text-anchor="middle" class="card-sub">email</text>
+
+      <line x1="120" y1="142" x2="120" y2="200" stroke="#34343a" stroke-width="1"/>
+      <rect x="80" y="200" width="80" height="36" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="120" y="215" text-anchor="middle" class="card-title">Txn email</text>
+      <text x="120" y="228" text-anchor="middle" class="card-sub">postmark</text>
+
+      <!-- From setup social -->
+      <line x1="260" y1="142" x2="260" y2="170" stroke="#34343a" stroke-width="1"/>
+      <rect x="200" y="170" width="120" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="260" y="185" text-anchor="middle" class="card-title">Connect social</text>
+
+      <!-- From bank account -->
+      <line x1="620" y1="142" x2="620" y2="200" stroke="#34343a" stroke-width="1"/>
+      <rect x="540" y="200" width="160" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="620" y="215" text-anchor="middle" class="card-title">Setup bookkeeping</text>
+
+      <!-- From write blog -->
+      <line x1="770" y1="142" x2="770" y2="200" stroke="#34343a" stroke-width="1"/>
+      <rect x="730" y="200" width="80" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="770" y="215" text-anchor="middle" class="card-title">SEO</text>
+
+      <line x1="870" y1="142" x2="870" y2="200" stroke="#34343a" stroke-width="1"/>
+      <rect x="830" y="200" width="80" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="870" y="215" text-anchor="middle" class="card-title">Content</text>
+
+      <!-- From gather prospects -->
+      <line x1="940" y1="142" x2="940" y2="200" stroke="#34343a" stroke-width="1"/>
+      <rect x="890" y="200" width="100" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="940" y="215" text-anchor="middle" class="card-title">Cold outr.</text>
+
+      <!-- From launch app -->
+      <line x1="600" y1="187" x2="600" y2="240" stroke="#34343a" stroke-width="1"/>
+      <rect x="550" y="240" width="100" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="600" y="255" text-anchor="middle" class="card-title">Support</text>
+
+      <line x1="570" y1="240" x2="570" y2="255" stroke="#34343a" stroke-width="1"/>
+
+      <!-- Level 4 -->
+      <!-- From connect social -->
+      <line x1="260" y1="192" x2="260" y2="240" stroke="#34343a" stroke-width="1"/>
+      <rect x="210" y="240" width="100" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="260" y="255" text-anchor="middle" class="card-title">Grow social</text>
+
+      <!-- From cold outreach -->
+      <line x1="940" y1="222" x2="940" y2="240" stroke="#34343a" stroke-width="1"/>
+      <rect x="885" y="240" width="110" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="940" y="255" text-anchor="middle" class="card-title">Qualify opps</text>
+
+      <!-- Level 5 -->
+      <!-- From grow social -->
+      <line x1="260" y1="262" x2="260" y2="310" stroke="#34343a" stroke-width="1"/>
+      <rect x="210" y="310" width="100" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="260" y="325" text-anchor="middle" class="card-title">Community</text>
+
+      <!-- From qualify -->
+      <line x1="940" y1="262" x2="940" y2="310" stroke="#34343a" stroke-width="1"/>
+      <rect x="885" y="310" width="110" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="940" y="325" text-anchor="middle" class="card-title">Close deals</text>
+
+      <!-- Level 6 -->
+      <line x1="940" y1="332" x2="940" y2="380" stroke="#34343a" stroke-width="1"/>
+      <rect x="875" y="380" width="130" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="940" y="395" text-anchor="middle" class="card-title">Onboard</text>
+
+      <!-- Level 7 -->
+      <line x1="940" y1="402" x2="940" y2="450" stroke="#34343a" stroke-width="1"/>
+      <rect x="880" y="450" width="120" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="940" y="465" text-anchor="middle" class="card-title">Referrals</text>
+
+      <!-- Side branches -->
+      <!-- Marketing website from company name -->
+      <line x1="180" y1="155" x2="340" y2="155" stroke="#34343a" stroke-width="1"/>
+      <rect x="300" y="165" width="120" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="360" y="180" text-anchor="middle" class="card-title">Mktg site</text>
+
+      <line x1="360" y1="187" x2="360" y2="240" stroke="#34343a" stroke-width="1"/>
+      <rect x="320" y="240" width="80" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="360" y="255" text-anchor="middle" class="card-title">Launch</text>
+
+      <!-- Monitoring from launch app + launch mktg -->
+      <line x1="440" y1="240" x2="440" y2="310" stroke="#34343a" stroke-width="1"/>
+      <rect x="400" y="310" width="80" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="440" y="325" text-anchor="middle" class="card-title">Monitor</text>
+
+      <!-- Paid ads from positioning -->
+      <line x1="880" y1="135" x2="880" y2="310" stroke="#34343a" stroke-width="1" stroke-dasharray="4,3"/>
+      <rect x="830" y="310" width="100" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="880" y="325" text-anchor="middle" class="card-title">Paid ads</text>
+
+      <!-- Legal + billing + chat (loose) -->
+      <rect x="700" y="310" width="80" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="740" y="325" text-anchor="middle" class="card-title">Billing</text>
+
+      <!-- Chat from support -->
+      <line x1="600" y1="262" x2="600" y2="310" stroke="#34343a" stroke-width="1"/>
+      <rect x="555" y="310" width="90" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="600" y="325" text-anchor="middle" class="card-title">Chat widget</text>
+
+      <rect x="700" y="370" width="80" height="22" rx="3" fill="#161718" stroke="#34343a" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="740" y="385" text-anchor="middle" class="card-title">Legal</text>
+
+      <!-- Stage labels on right -->
+      <text x="1010" y="78" text-anchor="end" class="title">INITIAL</text>
+      <text x="1010" y="132" text-anchor="end" class="title">IDENTITY</text>
+      <text x="1010" y="176" text-anchor="end" class="title">BUILD</text>
+      <text x="1010" y="250" text-anchor="end" class="title">GTM/LAUNCH</text>
+      <text x="1010" y="322" text-anchor="end" class="title">SCALE</text>
+      <text x="1010" y="462" text-anchor="end" class="title">MATURE</text>
+
+      <!-- Legend -->
+      <rect x="20" y="480" width="12" height="12" rx="2" fill="#161718" stroke="#34343a" stroke-width="1"/>
+      <text x="38" y="491" class="card-sub">hard dependency</text>
+      <rect x="180" y="480" width="12" height="12" rx="2" fill="#161718" stroke="#34343a" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="198" y="491" class="card-sub">parallel / loose</text>
+    </svg>
+  </div>
+</section>
+
+<!-- MISSING -->
+<section class="missing" id="missing">
+  <h2>Not Covered</h2>
+  <div class="missing-list">
+    <div class="missing-item">Hiring &amp; team building</div>
+    <div class="missing-item">Fundraising &amp; investor relations</div>
+    <div class="missing-item">Pricing strategy</div>
+    <div class="missing-item">Customer success &amp; churn</div>
+    <div class="missing-item">Partnerships &amp; integrations</div>
+    <div class="missing-item">Internal ops (payroll, HR, office)</div>
+  </div>
+</section>
+
+<footer>
+  <p>Source: Cofounder app Tech Tree (org: Xchool) &middot; Extracted 2026-05-12</p>
+</footer>
+
+</main>
+
+<script>
+// Scroll spy
+const sections = document.querySelectorAll('.stage, .tree-section, .missing');
+const links = document.querySelectorAll('.topbar-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 60) current = s.id; });
+  links.forEach(l => { l.classList.toggle('active', l.getAttribute('href').slice(1) === current); });
+});
+</script>
+</body>
+</html>
