@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>xchool | Proof of learning systems</title>
+<style>
+:root{
+  --ivory:#FAF8F1;
+  --paper:#FFFDF8;
+  --ink:#161615;
+  --muted:#66635B;
+  --line:#E5DED0;
+  --clay:#D97757;
+  --clay-dark:#A94C34;
+  --olive:#6F7F52;
+  --oat:#EFE7D8;
+  --blue:#234E70;
+  --shadow:0 24px 80px rgba(22,22,21,.12);
+  --serif:Georgia,"Times New Roman",Times,serif;
+  --sans:Trebuchet MS,Verdana,system-ui,sans-serif;
+  --mono:"Courier New",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(217,119,87,.22), transparent 28%),
+    radial-gradient(circle at 84% 2%, rgba(111,127,82,.18), transparent 26%),
+    linear-gradient(135deg, var(--ivory), #F5EFE4 52%, #ECE2D3);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.55;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.12;
+  background-image:linear-gradient(90deg, rgba(22,22,21,.08) 1px, transparent 1px),linear-gradient(rgba(22,22,21,.08) 1px, transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom, black, transparent 80%);
+}
+.wrap{max-width:1120px;margin:0 auto;padding:58px 24px 72px;position:relative}
+.hero{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:38px;
+  align-items:end;
+  min-height:78vh;
+}
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--clay-dark);
+  margin-bottom:18px;
+}
+.eyebrow:before{content:"";width:32px;height:2px;background:var(--clay)}
+h1{
+  font-family:var(--serif);
+  font-size:clamp(46px,8vw,96px);
+  line-height:.96;
+  letter-spacing:-.055em;
+  font-weight:500;
+  margin:0;
+}
+h1 em{color:var(--clay-dark);font-style:italic}
+.lede{
+  max-width:620px;
+  color:var(--muted);
+  font-size:20px;
+  margin:28px 0 0;
+}
+.hero-card{
+  background:rgba(255,253,248,.78);
+  border:1.5px solid var(--line);
+  border-radius:28px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(14px);
+  transform:rotate(1deg);
+}
+.hero-card strong{display:block;font-family:var(--serif);font-size:34px;line-height:1.08;font-weight:500;margin-bottom:18px}
+.hero-card p{color:var(--muted);margin:0 0 18px}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.badge{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 12px;font-size:13px;color:var(--muted)}
+section{margin-top:72px}
+.section-head{display:grid;grid-template-columns:.42fr 1fr;gap:28px;align-items:start;margin-bottom:26px}
+h2{font-family:var(--serif);font-size:clamp(30px,4.3vw,52px);line-height:1.02;letter-spacing:-.035em;font-weight:500;margin:0}
+.section-head p{margin:0;color:var(--muted);font-size:18px;max-width:680px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+  background:rgba(255,253,248,.82);
+  border:1.5px solid var(--line);
+  border-radius:22px;
+  padding:22px;
+  min-height:220px;
+  box-shadow:0 10px 35px rgba(22,22,21,.06);
+}
+.card .num{font-family:var(--mono);color:var(--clay-dark);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.card h3{font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.1;margin:20px 0 12px}
+.card p{margin:0;color:var(--muted)}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.step{position:relative;background:var(--ink);color:var(--paper);border-radius:20px;padding:22px;min-height:170px;overflow:hidden}
+.step:after{content:"";position:absolute;right:-30px;bottom:-30px;width:110px;height:110px;border-radius:50%;background:rgba(217,119,87,.28)}
+.step span{font-family:var(--mono);font-size:12px;color:#EBC7B7;letter-spacing:.12em;text-transform:uppercase}
+.step strong{display:block;font-family:var(--serif);font-size:26px;line-height:1.08;font-weight:500;margin:18px 0 10px;position:relative;z-index:1}
+.step p{margin:0;color:#D9D3C9;position:relative;z-index:1}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.panel{background:rgba(255,253,248,.84);border:1.5px solid var(--line);border-radius:24px;padding:28px}
+.panel.dark{background:var(--ink);color:var(--paper)}
+.panel h3{font-family:var(--serif);font-size:34px;line-height:1;margin:0 0 14px;font-weight:500}
+.panel p,.panel li{color:var(--muted)}
+.panel.dark p,.panel.dark li{color:#D9D3C9}
+ul{padding-left:20px;margin:16px 0 0}
+li{margin:10px 0}
+.quote{margin-top:18px;background:var(--oat);border-left:6px solid var(--clay);border-radius:20px;padding:26px;font-family:var(--serif);font-size:28px;line-height:1.18;color:#2B2A28}
+.footer{margin-top:72px;border-top:1.5px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:14px}
+.reveal{animation:rise .7s ease both}.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:860px){.hero,.section-head,.split{grid-template-columns:1fr}.hero{min-height:auto}.grid,.flow{grid-template-columns:1fr}.hero-card{transform:none}.footer{display:block}section{margin-top:54px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero">
+    <div class="reveal">
+      <div class="eyebrow">xchool</div>
+      <h1>Learning is not real until you can <em>prove</em> what changed.</h1>
+      <p class="lede">xchool builds proof of learning systems for education teams, training programs, and funders who need more than content, attendance, or vibes. We turn learning context into evidence people can trust.</p>
+    </div>
+    <aside class="hero-card reveal d1">
+      <strong>The simple question: how do you know?</strong>
+      <p>If a program claims it worked, xchool helps define the proof before the work starts, capture the journey as it happens, and turn the result into artifacts people can show.</p>
+      <div class="badges">
+        <span class="badge">Proof of learning</span>
+        <span class="badge">Learning data</span>
+        <span class="badge">AI workflows</span>
+        <span class="badge">Outcome evidence</span>
+      </div>
+    </aside>
+  </section>
+
+  <section class="reveal d2">
+    <div class="section-head">
+      <h2>What xchool does</h2>
+      <p>xchool is not generic AI consulting, not an LMS, and not a curriculum shop. It is the operating layer that makes learning outcomes visible, provable, and useful.</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <div class="num">01</div>
+        <h3>Define the win</h3>
+        <p>Name where learners or programs need to go, then decide what proof would show they actually got there.</p>
+      </article>
+      <article class="card">
+        <div class="num">02</div>
+        <h3>Capture context</h3>
+        <p>Bring scattered notes, learner work, conversations, milestones, and program data into one usable proof trail.</p>
+      </article>
+      <article class="card">
+        <div class="num">03</div>
+        <h3>Show what changed</h3>
+        <p>Turn the journey into reports, dashboards, CVs, claims, portfolios, or evidence packs that decision makers can read.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="reveal d3">
+    <div class="section-head">
+      <h2>How it works</h2>
+      <p>The method starts with the destination, then builds the proof system around the learning journey.</p>
+    </div>
+    <div class="flow">
+      <div class="step"><span>Start</span><strong>Where do you want to be?</strong><p>Define the outcome and the visible proof that would make it real.</p></div>
+      <div class="step"><span>Reality</span><strong>Where are you now?</strong><p>Surface what the learner, program, or team can already show.</p></div>
+      <div class="step"><span>Blockers</span><strong>What is missing?</strong><p>Find the data, behavior, evidence, or system gap blocking progress.</p></div>
+      <div class="step"><span>Proof</span><strong>What changed?</strong><p>Package the evidence into a form that learners, managers, funders, or parents can use.</p></div>
+    </div>
+  </section>
+
+  <section class="split reveal d2">
+    <div class="panel">
+      <h3>The old way</h3>
+      <p>Run the program, collect attendance, write a summary, and hope people believe value was created.</p>
+      <ul>
+        <li>Evidence is scattered.</li>
+        <li>Success is defined too late.</li>
+        <li>Reporting becomes manual pain.</li>
+        <li>AI becomes a gimmick instead of proof.</li>
+      </ul>
+    </div>
+    <div class="panel dark">
+      <h3>The xchool way</h3>
+      <p>Design the proof trail first, collect the right signals during the journey, and ship artifacts that make progress visible.</p>
+      <ul>
+        <li>Proof is defined before delivery.</li>
+        <li>Context becomes the moat.</li>
+        <li>AI helps surface what humans miss.</li>
+        <li>The final output is evidence, not decoration.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="reveal d3">
+    <div class="section-head">
+      <h2>Why context matters</h2>
+      <p>Content is everywhere. AI is everywhere. The edge is the learning context only your people, program, and data can own.</p>
+    </div>
+    <div class="quote">You can buy world class content. You cannot buy the context of your own learners, blockers, decisions, and proof.</div>
+  </section>
+
+  <footer class="footer">
+    <div>xchool | proof of learning systems</div>
+    <div>Define wins. Learn what matters. Show what changed.</div>
+  </footer>
+</main>
+</body>
+</html>
