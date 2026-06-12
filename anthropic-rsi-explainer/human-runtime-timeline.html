@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>when humans build themselves</title>
+<style>
+:root{
+  --ivory:#FAF9F5; --paper:#FFFFFF; --slate:#141413; --clay:#D97757; --clay-d:#B85C3E;
+  --pill:#F0EEE6; --g200:#E6E3DA; --g300:#D1CFC5; --g500:#87867F; --g700:#3D3D3A;
+  --serif:ui-serif,Georgia,"Times New Roman",Times,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Monaco,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ivory);color:var(--slate);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:64px 36px 120px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--g500);display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:24px;height:1.5px;background:var(--clay)}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(36px,5vw,58px);line-height:1.06;letter-spacing:-.018em;margin:.25em 0 .2em}
+h1 em{font-style:italic;color:var(--clay)}
+.lede{max-width:640px;color:var(--g700);font-size:17px;margin:0 0 56px}
+.row{display:grid;grid-template-columns:1.35fr 1fr;gap:56px;align-items:center;opacity:0;animation:rise .6s ease forwards}
+.row:nth-child(1){animation-delay:.05s}.row:nth-child(3){animation-delay:.2s}.row:nth-child(5){animation-delay:.35s}.row:nth-child(7){animation-delay:.5s}.row:nth-child(9){animation-delay:.65s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.pill{background:var(--pill);border-radius:52px;padding:30px 34px;display:flex;align-items:center;gap:22px;min-height:124px}
+.icon{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:64px}
+.icon svg{width:40px;height:40px;stroke:var(--slate);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.icon .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--g500);white-space:nowrap}
+.flow{flex:0 0 26px;height:1.5px;background:var(--g300);position:relative}
+.flow::after{content:"";position:absolute;right:0;top:-3px;border-left:5px solid var(--g300);border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
+.station{margin-left:auto;width:66px;height:66px;flex:0 0 66px;background:var(--paper);border-radius:50%;display:grid;place-items:center}
+.burst{width:34px;height:34px;fill:var(--clay)}
+.burst.big{width:42px;height:42px}
+.note .when{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--g500)}
+.note h3{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:-.01em;margin:6px 0 6px}
+.note p{margin:0;color:var(--g500);font-size:15px;max-width:420px}
+.note b{color:var(--g700);font-weight:600}
+.connector{display:grid;grid-template-columns:1.35fr 1fr;gap:56px}
+.connector svg{width:100%;height:44px;display:block}
+.connector path{fill:none;stroke:var(--clay);stroke-width:1.6}
+.looppill{position:relative;padding-bottom:64px}
+.chain{display:flex;gap:7px;flex-wrap:nowrap;overflow:hidden;align-items:center}
+.cell{width:22px;height:22px;flex:0 0 22px;border:1.5px solid var(--g300);border-radius:5px;background:var(--paper);display:grid;place-items:center}
+.cell i{width:7px;height:7px;background:var(--clay);border-radius:1.5px;display:block}
+.cell:nth-child(3n) i{background:var(--g300)}
+.loopback{position:absolute;left:34px;right:34px;bottom:14px;height:36px}
+.loopback path{fill:none;stroke:var(--clay);stroke-width:1.6}
+.proof{margin-top:64px;border:1.5px solid var(--g300);border-radius:14px;background:var(--paper);padding:22px 26px;display:flex;gap:16px;align-items:baseline}
+.proof .tag{font-family:var(--mono);font-size:11px;color:var(--ivory);background:var(--slate);border-radius:999px;padding:3px 12px;text-transform:uppercase;letter-spacing:.08em}
+.proof p{margin:0;color:var(--g700);font-size:15.5px}
+@media (max-width:760px){.row,.connector{grid-template-columns:1fr;gap:18px}.connector svg{display:none}.note{padding-left:8px;margin-bottom:14px}.pill{flex-wrap:wrap}.flow{display:none}.station{margin-left:0}}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+<symbol id="bb" viewBox="0 0 40 40">
+<rect x="17" y="17" width="6" height="6"/>
+<rect x="17" y="8" width="6" height="5"/><rect x="17" y="27" width="6" height="5"/>
+<rect x="8" y="17" width="5" height="6"/><rect x="27" y="17" width="5" height="6"/>
+<rect x="10" y="10" width="4" height="4"/><rect x="26" y="10" width="4" height="4"/>
+<rect x="10" y="26" width="4" height="4"/><rect x="26" y="26" width="4" height="4"/>
+<rect x="18" y="1" width="4" height="4"/><rect x="18" y="35" width="4" height="4"/>
+<rect x="1" y="18" width="4" height="4"/><rect x="35" y="18" width="4" height="4"/>
+</symbol>
+</svg>
+<div class="wrap">
+<div class="eyebrow">the human runtime</div>
+<h1>when humans build <em>themselves</em></h1>
+<p class="lede">the same closing-the-loop curve, run on a person instead of a model. compile the standard, run the loop, let the changelog upgrade the system that produced it.</p>
+
+<div class="row">
+<div class="pill">
+<div class="icon"><svg viewBox="0 0 40 40"><circle cx="20" cy="13" r="6"/><path d="M8 33c1.5-8 22.5-8 24 0"/></svg><span class="lbl">person</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><path d="M8 33V17l12-8 12 8v16"/><path d="M6 33h28"/><path d="M17 33v-8h6v8"/></svg><span class="lbl">school</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><rect x="6" y="9" width="28" height="17" rx="2"/><path d="M11 15h13M11 20h9"/><circle cx="28" cy="21" r="3"/><path d="M26 23.5l-1.5 7 3.5-2.5 3.5 2.5-1.5-7"/></svg><span class="lbl">diploma</span></div>
+<div class="station"><svg class="burst"><use href="#bb"/></svg></div>
+</div>
+<div class="note"><div class="when">1900s to 2020s</div><h3>the credential era</h3><p>learn once, get certified once, coast on the paper for decades. the transcript is written by the institution, not by the work.</p></div>
+</div>
+
+<div class="connector"><svg viewBox="0 0 560 44" preserveAspectRatio="none"><path d="M520 2 C520 34 150 8 96 38"/><path d="M96 38l12-1.5M96 38l7-9"/></svg><div></div></div>
+
+<div class="row">
+<div class="pill">
+<div class="icon"><svg viewBox="0 0 40 40"><circle cx="20" cy="13" r="6"/><path d="M8 33c1.5-8 22.5-8 24 0"/></svg><span class="lbl">person</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><rect x="9" y="9" width="22" height="14" rx="2"/><path d="M5 29h30l-3-5H8z"/></svg><span class="lbl">computer</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><path d="M7 8h26v17H21l-8 7v-7H7z"/><rect x="14" y="14" width="4" height="4" fill="#D97757" stroke="none"/><rect x="21" y="14" width="4" height="4" fill="#D97757" stroke="none"/><rect x="17.5" y="18.5" width="4" height="4" fill="#D97757" stroke="none"/></svg><span class="lbl">ai does it</span></div>
+<div class="station"><svg class="burst"><use href="#bb"/></svg></div>
+</div>
+<div class="note"><div class="when">2023 to 2026</div><h3>ai does the work</h3><p>outputs look great and prove nothing. when credentials misrepresent their holders, <b>the contract breaks</b>.</p></div>
+</div>
+
+<div class="connector"><svg viewBox="0 0 560 44" preserveAspectRatio="none"><path d="M520 2 C520 34 150 8 96 38"/><path d="M96 38l12-1.5M96 38l7-9"/></svg><div></div></div>
+
+<div class="row">
+<div class="pill">
+<div class="icon"><svg viewBox="0 0 40 40"><circle cx="20" cy="13" r="6"/><path d="M8 33c1.5-8 22.5-8 24 0"/></svg><span class="lbl">person</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><rect x="11" y="6" width="18" height="27" rx="2"/><path d="M15 13h10M15 18h10M15 23h6"/></svg><span class="lbl">standard</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="6.5"/><path d="M20 7v4.5M20 28.5V33M7 20h4.5M28.5 20H33M10.8 10.8l3.2 3.2M26 26l3.2 3.2M29.2 10.8L26 14M14 26l-3.2 3.2"/></svg><span class="lbl">inferencing</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><rect x="11" y="6" width="18" height="27" rx="2"/><path d="M15 14l2.5 2.5L21 12"/><path d="M15 22l2.5 2.5L21 20"/><path d="M23 15h3M23 23h3"/></svg><span class="lbl">skills.md</span></div>
+<div class="station"><svg class="burst"><use href="#bb"/></svg></div>
+</div>
+<div class="note"><div class="when">today</div><h3>inferencing: compile the loop</h3><p>any syllabus, rubric, or job description compiles into a system a person can actually run. <b>the human keeps the direction</b>; the standard becomes the program.</p></div>
+</div>
+
+<div class="connector"><svg viewBox="0 0 560 44" preserveAspectRatio="none"><path d="M520 2 C520 34 150 8 96 38"/><path d="M96 38l12-1.5M96 38l7-9"/></svg><div></div></div>
+
+<div class="row">
+<div class="pill">
+<div class="icon"><svg viewBox="0 0 40 40"><circle cx="20" cy="13" r="6"/><path d="M8 33c1.5-8 22.5-8 24 0"/></svg><span class="lbl">person</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><path d="M32 17a12 12 0 1 0 1 6"/><path d="M33 9v8h-8"/></svg><span class="lbl">loops</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><circle cx="11" cy="15" r="4"/><circle cx="29" cy="15" r="4"/><circle cx="20" cy="12" r="4.5"/><path d="M4 31c1-5 13-5 14 0M22 31c1-5 13-5 14 0"/></svg><span class="lbl">peers + ai</span></div>
+<div class="flow"></div>
+<div class="icon"><svg viewBox="0 0 40 40"><rect x="9" y="6" width="22" height="28" rx="2"/><path d="M13 13l2 2 3-4M21 14h6"/><path d="M13 21l2 2 3-4M21 22h6"/><path d="M13 29h4M21 29h6"/></svg><span class="lbl">changelog</span></div>
+<div class="station"><svg class="burst"><use href="#bb"/></svg></div>
+</div>
+<div class="note"><div class="when">today</div><h3>loops: run and log</h3><p>daily and weekly reps with ai and peers. every rep emits an entry: <b>link, date, reader</b>. honest ai usage logged, struggles versioned, dialogue captured.</p></div>
+</div>
+
+<div class="connector"><svg viewBox="0 0 560 44" preserveAspectRatio="none"><path d="M520 2 C520 34 150 8 96 38"/><path d="M96 38l12-1.5M96 38l7-9"/></svg><div></div></div>
+
+<div class="row">
+<div class="pill looppill">
+<div class="icon"><svg viewBox="0 0 40 40"><circle cx="20" cy="13" r="6"/><path d="M8 33c1.5-8 22.5-8 24 0"/></svg><span class="lbl">person</span></div>
+<div class="flow"></div>
+<div class="chain">
+<span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span><span class="cell"><i></i></span>
+</div>
+<div class="station"><svg class="burst big"><use href="#bb"/></svg></div>
+<svg class="loopback" viewBox="0 0 700 36" preserveAspectRatio="none"><path d="M690 2 C690 30 660 30 600 30 L60 30 C30 30 22 26 20 8"/><path d="M20 8l-5 11M20 8l8 9"/></svg>
+</div>
+<div class="note"><div class="when">now to 20xx</div><h3>closing the loop</h3><p>the changelog upgrades the system that produced it: each entry rewrites the skills.md, sharpens the next rep, and <b>the history becomes the assessment</b>. humans keep compounding alongside ai instead of handing everything over.</p></div>
+</div>
+
+<div class="proof"><span class="tag">proof</span><p><b>schools ship programs. you ship the runtime.</b> the log is the new transcript: anyone can read what you ran, what broke, and who verified it.</p></div>
+</div>
+</body>
+</html>
