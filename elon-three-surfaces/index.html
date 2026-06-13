@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elon Program · three surfaces</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family: ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; background:#0f0f12; color:#e7e7ea; line-height:1.5; padding:30px 16px 80px; }
+.pg { max-width:1000px; margin:0 auto; }
+.head { text-align:center; margin-bottom:8px; }
+.head .eyebrow { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#7d7d89; font-weight:700; }
+.head h1 { font-size:30px; letter-spacing:-.02em; margin:8px 0 6px; }
+.head p { color:#9a9aa6; font-size:15px; max-width:640px; margin:0 auto; }
+.skeleton { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin:18px 0 6px; }
+.skeleton .chip { font-size:12px; font-weight:600; padding:5px 11px; border-radius:999px; background:#18181d; border:1px solid #28282f; color:#b6b6c0; }
+
+.sw input { display:none; }
+.swbar { display:flex; gap:8px; justify-content:center; margin:22px 0 20px; flex-wrap:wrap; }
+.swbar label { cursor:pointer; padding:11px 20px; border-radius:12px; font-size:14px; font-weight:700; background:#18181d; border:1px solid #28282f; color:#9a9aa6; user-select:none; text-align:center; min-width:200px; }
+.swbar label small { display:block; font-weight:500; font-size:11.5px; color:#6f6f7b; margin-top:2px; }
+#sn:checked ~ .swbar label[for=sn] { background:#2b59d8; border-color:#2b59d8; color:#fff; }
+#sn:checked ~ .swbar label[for=sn] small { color:#cdd9ff; }
+#sd:checked ~ .swbar label[for=sd] { background:#5865f2; border-color:#5865f2; color:#fff; }
+#sd:checked ~ .swbar label[for=sd] small { color:#d7dbff; }
+#sa:checked ~ .swbar label[for=sa] { background:#e07b1a; border-color:#e07b1a; color:#fff; }
+#sa:checked ~ .swbar label[for=sa] small { color:#ffe6c9; }
+.surface { display:none; }
+#sn:checked ~ .surfaces #fn,
+#sd:checked ~ .surfaces #fd,
+#sa:checked ~ .surfaces #fa { display:block; }
+.cap { text-align:center; color:#7d7d89; font-size:13px; margin-top:16px; }
+
+/* shared table */
+table.t { width:100%; border-collapse:collapse; font-size:13px; }
+table.t td, table.t th { padding:9px 11px; text-align:left; vertical-align:top; }
+.tag { display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:5px; white-space:nowrap; }
+.t-req{background:#fdebec;color:#c0394b;} .t-ship{background:#ddedea;color:#277563;} .t-fp{background:#e7e3f5;color:#6f5bd0;} .t-fear{background:#faecd8;color:#b06f1c;} .t-fail{background:#f1f0ee;color:#6b6a66;}
+
+/* ---------------- NOTION (light) ---------------- */
+.nf { background:#fff; color:#37352f; border-radius:14px; padding:26px 28px 30px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+.nf .emoji { font-size:34px; } .nf h2 { font-size:26px; font-weight:800; letter-spacing:-.02em; margin:6px 0 2px; }
+.nf .sub { color:#787774; font-size:14px; margin-bottom:16px; }
+.ntab input { display:none; }
+.ntabbar { display:flex; gap:4px; border-bottom:1px solid #e9e9e7; flex-wrap:wrap; }
+.ntabbar label { cursor:pointer; padding:8px 13px 10px; font-size:14px; font-weight:600; color:#91918e; border-bottom:2px solid transparent; margin-bottom:-1px; user-select:none; }
+.ntabbar label:hover { color:#37352f; }
+#ng:checked ~ .ntabbar label[for=ng], #nl:checked ~ .ntabbar label[for=nl], #ns:checked ~ .ntabbar label[for=ns], #nr:checked ~ .ntabbar label[for=nr] { color:#37352f; border-bottom-color:#37352f; }
+.ntp { display:none; padding-top:18px; }
+#ng:checked ~ .npanels #qg, #nl:checked ~ .npanels #ql, #ns:checked ~ .npanels #qs, #nr:checked ~ .npanels #qr { display:block; }
+.nf table.t { border:1px solid #e9e9e7; border-radius:6px; overflow:hidden; }
+.nf table.t th { background:#f7f6f3; color:#787774; font-size:12px; font-weight:600; border-bottom:1px solid #e9e9e7; border-right:1px solid #ededec; white-space:nowrap; }
+.nf table.t td { border-bottom:1px solid #f1f1ef; border-right:1px solid #f1f1ef; }
+.nf table.t tr:last-child td { border-bottom:0; }
+.nf .lk { color:#2383e2; } .chk{font-weight:600;} .chk.ok{color:#277563;} .chk.mid{color:#b06f1c;} .chk.redo{color:#c0394b;}
+.statrow { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.stat { border:1px solid #e9e9e7; border-radius:8px; padding:12px 14px; }
+.stat .k{color:#91918e;font-size:12px;font-weight:600;} .stat .v{font-size:24px;font-weight:800;margin-top:2px;} .stat .c{color:#787774;font-size:12px;}
+.lead { color:#5f5e5b; font-size:13.5px; margin-bottom:10px; }
+
+/* ---------------- DISCORD (dark) ---------------- */
+.dc { display:grid; grid-template-columns:220px 1fr; border-radius:14px; overflow:hidden; border:1px solid #000; box-shadow:0 20px 60px rgba(0,0,0,.5); min-height:520px; }
+.dc-chan { background:#2b2d31; }
+.dc-chan-h { padding:15px 16px; font-weight:700; font-size:15px; border-bottom:1px solid #232428; }
+.dc-cat { color:#949ba4; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:14px 8px 4px 16px; }
+.dc-item { display:flex; align-items:center; gap:7px; margin:1px 8px; padding:6px 8px; border-radius:5px; color:#949ba4; font-size:15px; }
+.dc-item .h{color:#80848e;font-weight:600;} .dc-item.sel{background:#404249;color:#fff;} .dc-item.pin{color:#e8c07d;}
+.dc-main { background:#313338; display:flex; flex-direction:column; }
+.dc-main-h { padding:13px 18px; border-bottom:1px solid #232428; display:flex; align-items:center; gap:10px; }
+.dc-main-h .t{font-weight:700;font-size:15px;} .dc-main-h .t .h{color:#80848e;} .dc-main-h .d{color:#949ba4;font-size:13px;border-left:1px solid #3f4147;padding-left:10px;}
+.dc-filters { display:flex; gap:7px; padding:12px 18px; flex-wrap:wrap; border-bottom:1px solid #28292d; }
+.dc-f { font-size:12px; font-weight:600; padding:4px 10px; border-radius:999px; background:#2b2d31; color:#b5bac1; border:1px solid #3a3c42; }
+.dc-f.on { background:#3c3e44; color:#fff; }
+.dc-posts { padding:14px 18px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.dc-post { background:#2b2d31; border:1px solid #232428; border-radius:10px; padding:13px; }
+.dc-post h4{font-size:14px;margin:8px 0 5px;color:#f2f3f5;} .dc-post p{color:#b5bac1;font-size:13px;} .dc-post .lk{color:#5fa8ee;font-size:12.5px;}
+.dc-post .meta{display:flex;align-items:center;gap:8px;margin-top:9px;} .av{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:9px;font-weight:700;color:#fff;} .who{color:#949ba4;font-size:12px;} .rc{margin-left:auto;color:#949ba4;font-size:12px;} .chk2{font-size:11.5px;font-weight:700;margin-top:7px;display:inline-block;}
+
+/* ---------------- AIRTABLE (light) ---------------- */
+.at-wrap { display:grid; grid-template-columns:1fr 1.25fr; gap:16px; }
+.at-card { background:#fff; color:#1d1f25; border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.5); overflow:hidden; }
+.at-band { height:64px; background:linear-gradient(120deg,#e07b1a,#f0a040); }
+.at-body { padding:22px 24px 26px; margin-top:-26px; }
+.at-logo { font-size:11px; font-weight:800; color:#c96a10; letter-spacing:.1em; text-transform:uppercase; }
+.at-card h3 { font-size:19px; margin:5px 0 4px; }
+.at-sub { color:#6b7280; font-size:13px; margin-bottom:16px; }
+.fld { margin-bottom:13px; }
+.fld label { display:block; font-size:12.5px; font-weight:700; margin-bottom:5px; }
+.fld label .req{color:#e5484d;} .fld label .hint{font-weight:400;color:#9099a3;font-size:11.5px;}
+.fld input,.fld .sel { width:100%; border:1px solid #d7dbe0; border-radius:7px; padding:9px 11px; font-size:13.5px; color:#1d1f25; background:#fbfbfc; font-family:inherit; }
+.fld .sel { color:#8a909a; display:flex; justify-content:space-between; }
+.at-submit { background:#e07b1a; color:#fff; border:0; padding:11px; border-radius:8px; font-size:14px; font-weight:700; width:100%; margin-top:4px; }
+.at-note { text-align:center; color:#9099a3; font-size:12px; margin-top:10px; }
+.board-h { padding:14px 18px; border-bottom:1px solid #eceef1; font-weight:800; font-size:14px; color:#1d1f25; }
+.board-h span{color:#9099a3;font-weight:500;font-size:12.5px;}
+.at-card table.t th { background:#f6f7f9; color:#6b7280; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; border-bottom:1px solid #eceef1; white-space:nowrap; }
+.at-card table.t td { color:#1d1f25; border-bottom:1px solid #f0f1f4; }
+.at-card .host { background:#fff8ec; }
+.lkb{color:#166ee1;} .rate{font-weight:700;} .rate.g{color:#1a9b54;} .rate.o{color:#d2851a;} .rate.r{color:#e5484d;}
+.legend{color:#9099a3;font-size:12px;padding:10px 18px;border-top:1px solid #eceef1;}
+
+.foot { margin-top:26px; background:#18181d; border:1px solid #28282f; border-radius:12px; padding:16px 18px; text-align:center; }
+.foot b{color:#fff;} .foot p{color:#9a9aa6;font-size:14px;margin-top:5px;}
+.flowline{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;font-size:13px;}
+.flowline .n{padding:7px 13px;border-radius:8px;background:#1f1f25;border:1px solid #2c2c34;color:#cfcfd8;}
+.flowline .ar{color:#6f6f7b;align-self:center;font-weight:700;}
+@media (max-width:840px){ .dc{grid-template-columns:1fr;} .dc-chan{display:none;} .dc-posts{grid-template-columns:1fr;} .at-wrap{grid-template-columns:1fr;} .statrow{grid-template-columns:1fr;} table.t{display:block;overflow-x:auto;white-space:nowrap;} }
+</style>
+</head>
+<body>
+<div class="pg">
+  <div class="head">
+    <span class="eyebrow">Elon Program · RSI for humans</span>
+    <h1>One structure, three surfaces</h1>
+    <p>The same Goal / Logs / Sessions / Resources skeleton, captured at three levels. One record flows up all three.</p>
+  </div>
+  <div class="skeleton">
+    <span class="chip">🎯 Goal &amp; Outcome</span>
+    <span class="chip">🔨 Logs (+ self-check)</span>
+    <span class="chip">🔄 Sessions</span>
+    <span class="chip">📚 Resources</span>
+  </div>
+
+  <div class="sw">
+    <input type="radio" name="surface" id="sn" checked>
+    <input type="radio" name="surface" id="sd">
+    <input type="radio" name="surface" id="sa">
+    <div class="swbar">
+      <label for="sn">📓 Notion<small>individual · private proof</small></label>
+      <label for="sd">💬 Discord<small>social · shared proof</small></label>
+      <label for="sa">🏛️ Airtable<small>institutional · recorded proof</small></label>
+    </div>
+
+    <div class="surfaces">
+
+      <!-- ============ NOTION ============ -->
+      <section class="surface" id="fn">
+        <div class="nf">
+          <div class="emoji">🚀</div>
+          <h2>Elon Program</h2>
+          <p class="sub">Their own record. Full, raw, owned by them. Same four tabs as every program.</p>
+          <div class="ntab">
+            <input type="radio" name="ntb" id="ng" checked>
+            <input type="radio" name="ntb" id="nl">
+            <input type="radio" name="ntb" id="ns">
+            <input type="radio" name="ntb" id="nr">
+            <div class="ntabbar">
+              <label for="ng">🎯 Goal</label>
+              <label for="nl">🔨 Logs</label>
+              <label for="ns">🔄 Sessions</label>
+              <label for="nr">📚 Resources</label>
+            </div>
+            <div class="npanels">
+              <div class="ntp" id="qg">
+                <p class="lead">Where you are going, and where you are now.</p>
+                <div class="statrow">
+                  <div class="stat"><div class="k">People helped</div><div class="v">12</div><div class="c">+5 this week</div></div>
+                  <div class="stat"><div class="k">Value created</div><div class="v">$3,400</div><div class="c">this cohort</div></div>
+                  <div class="stat"><div class="k">Target by 31 Jul</div><div class="v">120</div><div class="c">aggressive 10x</div></div>
+                </div>
+              </div>
+              <div class="ntp" id="ql">
+                <p class="lead">What you cooked + did, with a self-check. Evidence types are the Elon-specific part.</p>
+                <table class="t"><thead><tr><th>Date</th><th>What I did</th><th>Evidence type</th><th>Link</th><th>Self-check</th></tr></thead><tbody>
+                  <tr><td>13 Jun</td><td>Killed the onboarding form</td><td><span class="tag t-req">requirement questioned</span></td><td><span class="lk">notion ↗</span></td><td><span class="chk ok">signups +18%</span></td></tr>
+                  <tr><td>12 Jun</td><td>Shipped cost teardown v1</td><td><span class="tag t-ship">shipped</span></td><td><span class="lk">loom ↗</span></td><td><span class="chk mid">rough, needs data</span></td></tr>
+                  <tr><td>09 Jun</td><td>Pricing page flopped</td><td><span class="tag t-fail">failure</span></td><td><span class="lk">tweet ↗</span></td><td><span class="chk redo">retry simpler</span></td></tr>
+                </tbody></table>
+              </div>
+              <div class="ntp" id="qs">
+                <p class="lead">Each huddle: hard feedback received, what you gave, next move.</p>
+                <table class="t"><thead><tr><th>Date</th><th>Feedback received</th><th>From</th><th>I gave</th><th>Next</th></tr></thead><tbody>
+                  <tr><td>13 Jun</td><td>"teardown buries the point"</td><td>Theo</td><td>helped Ana on her metric</td><td>rewrite top line</td></tr>
+                  <tr><td>06 Jun</td><td>"busy, not effective"</td><td>Maya</td><td>pushed Sky to delete a report</td><td>cut list to 3</td></tr>
+                </tbody></table>
+              </div>
+              <div class="ntp" id="qr">
+                <p class="lead">Extra: sources and what they gave you.</p>
+                <table class="t"><thead><tr><th>Source</th><th>Type</th><th>What I found</th><th>How it helps</th></tr></thead><tbody>
+                  <tr><td>Elon bio ch.4</td><td>read</td><td>first-principles on cost</td><td>applied to pricing</td></tr>
+                  <tr><td>Call w/ founder</td><td>talk</td><td>how they cut features</td><td>nerve to delete onboarding</td></tr>
+                </tbody></table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="cap">Level 1. The deep, private record. The link in each log points here.</p>
+      </section>
+
+      <!-- ============ DISCORD ============ -->
+      <section class="surface" id="fd">
+        <div class="dc">
+          <div class="dc-chan">
+            <div class="dc-chan-h">RSI for humans ▾</div>
+            <div class="dc-cat">Programs</div>
+            <div class="dc-item sel"><span class="h">#</span> elon</div>
+            <div class="dc-item"><span class="h">#</span> paul-graham</div>
+            <div class="dc-item"><span class="h">#</span> wef</div>
+            <div class="dc-cat">Pinned</div>
+            <div class="dc-item pin">📌 goal + targets</div>
+          </div>
+          <div class="dc-main">
+            <div class="dc-main-h"><span class="t"><span class="h">#</span> elon</span><span class="d">1 forum = the program. Tags = the Log evidence types.</span></div>
+            <div class="dc-filters">
+              <span class="dc-f on">All</span>
+              <span class="dc-f">requirement questioned</span>
+              <span class="dc-f">shipped</span>
+              <span class="dc-f">first principle</span>
+              <span class="dc-f">fear done</span>
+              <span class="dc-f">failure</span>
+            </div>
+            <div class="dc-posts">
+              <div class="dc-post">
+                <span class="tag t-req">requirement questioned</span>
+                <h4>Killed the onboarding form</h4>
+                <p>Deleted the required form. Testing zero-friction signup.</p>
+                <div class="lk">🔗 notion.so/maya/onboarding</div>
+                <span class="chk2" style="color:#79c79a">self-check: signups +18%</span>
+                <div class="meta"><span class="av" style="background:#e0707a">M</span><span class="who">Maya</span><span class="rc">💬 4</span></div>
+              </div>
+              <div class="dc-post">
+                <span class="tag t-ship">shipped</span>
+                <h4>Cost teardown v1</h4>
+                <p>Broke pricing to raw inputs. Loom + doc inside.</p>
+                <div class="lk">🔗 notion.so/theo/teardown</div>
+                <span class="chk2" style="color:#e6c06b">self-check: rough, needs data</span>
+                <div class="meta"><span class="av" style="background:#5e9fe8">T</span><span class="who">Theo</span><span class="rc">💬 6</span></div>
+              </div>
+              <div class="dc-post">
+                <span class="tag t-fail">failure</span>
+                <h4>Pricing page flopped publicly</h4>
+                <p>Posted it, got crickets. Sharing what I learned.</p>
+                <div class="lk">🔗 x.com/ana/pricing</div>
+                <span class="chk2" style="color:#f08a8a">self-check: retry simpler</span>
+                <div class="meta"><span class="av" style="background:#72bc8f">A</span><span class="who">Ana</span><span class="rc">💬 9</span></div>
+              </div>
+              <div class="dc-post" style="border-style:dashed;background:#2b2d3155;">
+                <span class="tag t-fp">first principle</span>
+                <h4 style="color:#9aa">your post here</h4>
+                <p>Pick a tag = the evidence type. One line + link. Done.</p>
+                <div class="meta"><span class="av" style="background:#404249">?</span><span class="who">you</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="cap">Level 2. Peers witness it. Each post = one Log entry, shared with its self-check.</p>
+      </section>
+
+      <!-- ============ AIRTABLE ============ -->
+      <section class="surface" id="fa">
+        <div class="at-wrap">
+          <div class="at-card">
+            <div class="at-band"></div>
+            <div class="at-body">
+              <div class="at-logo">Elon · Logs</div>
+              <h3>Add a log</h3>
+              <p class="at-sub">The portal members use. Same fields as the Notion Logs tab.</p>
+              <div class="fld"><label>Your name <span class="req">*</span></label><div class="sel">Select member <span>▾</span></div></div>
+              <div class="fld"><label>What I cooked / did <span class="req">*</span></label><input placeholder="e.g. killed the onboarding form"></div>
+              <div class="fld"><label>Evidence type <span class="hint">· pick one</span></label><div class="sel">requirement questioned <span>▾</span></div></div>
+              <div class="fld"><label>Link <span class="req">*</span> <span class="hint">· paste your Notion / Discord link</span></label><input placeholder="notion.so/..."></div>
+              <div class="fld"><label>Self-check <span class="hint">· did it work?</span></label><input placeholder="e.g. signups +18%"></div>
+              <button class="at-submit">Submit log</button>
+              <p class="at-note">5 fields. Host adds momentum + notes.</p>
+            </div>
+          </div>
+          <div class="at-card">
+            <div class="board-h">Logs <span>· grid view · grouped by member</span></div>
+            <table class="t"><thead><tr><th>Member</th><th>What I did</th><th>Type</th><th>Link</th><th>Self-check</th><th class="host">Momentum</th></tr></thead><tbody>
+              <tr><td>Maya</td><td>killed onboarding form</td><td><span class="tag t-req">req questioned</span></td><td><span class="lkb">link ↗</span></td><td>+18% signups</td><td class="host"><span class="rate g">On track</span></td></tr>
+              <tr><td>Theo</td><td>cost teardown v1</td><td><span class="tag t-ship">shipped</span></td><td><span class="lkb">link ↗</span></td><td>rough</td><td class="host"><span class="rate g">On track</span></td></tr>
+              <tr><td>Ana</td><td>pricing page</td><td><span class="tag t-fail">failure</span></td><td><span class="lkb">link ↗</span></td><td>retry simpler</td><td class="host"><span class="rate o">At risk</span></td></tr>
+              <tr><td>Sky</td><td>(no log this week)</td><td>n/a</td><td>n/a</td><td>n/a</td><td class="host"><span class="rate r">Stuck</span></td></tr>
+            </tbody></table>
+            <div class="legend">Same rows as Notion + Discord, now queryable and reportable. The amber column is host-only. Group by member for individual trails, by type for the program scoreboard.</div>
+          </div>
+        </div>
+        <p class="cap">Level 3. The shared record: verifiable, reportable, billable.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>One row, three surfaces.</b>
+    <p>A single Log entry exists at every level. Define the evidence once, capture the same shape forever.</p>
+    <div class="flowline">
+      <span class="n">📓 Notion record</span><span class="ar">→</span>
+      <span class="n">💬 Discord post</span><span class="ar">→</span>
+      <span class="n">🏛️ Airtable row</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
